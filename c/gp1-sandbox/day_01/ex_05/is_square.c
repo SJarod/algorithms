@@ -12,9 +12,13 @@ void is_square(unsigned int num)
 	switch (num % 5)
 	{
 	case 0:
-		if (num != 0)
+		while (num >= 100)
 		{
-			my_put_char('Y');
+			num = num / 100;
+		}
+		if (num != 0 && num % 10 != 0)
+		{
+			is_square(num);
 		}
 		else
 			my_put_char('N');
