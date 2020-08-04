@@ -10,6 +10,8 @@ void my_put_char(char c)
 void is_prime(unsigned int num)
 {
 	int prime = 1;
+	if (num == 0 || num == 1)
+		prime = 0;
 	for (unsigned int i = 2; i < num; ++i)
 	{
 		if (num % i == 0)
