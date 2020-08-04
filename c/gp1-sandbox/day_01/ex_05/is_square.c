@@ -16,7 +16,12 @@ void is_square(unsigned int num)
 		{
 			num = num / 100;
 		}
-		if (num != 0 && num % 10 != 0)
+		if (num == 5)
+		{
+			my_put_char('N');
+			break;
+		}
+		else if (num != 0 && num % 10 != 0)
 		{
 			is_square(num);
 		}
