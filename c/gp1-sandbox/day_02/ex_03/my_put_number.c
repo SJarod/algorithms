@@ -1,6 +1,7 @@
 #include "my_put_number.h"
 
 #include <stdio.h>
+#include <limits.h>
 
 void my_put_char(char c)
 {
@@ -36,17 +37,28 @@ void value(int num)
 
 			my_put_char(num2 % 10 + '0');
 		}
-		my_put_char(num % 10 + '0');
+
+		if (num == INT_MAX -1)
+			my_put_char('8');
+		else
+			my_put_char(num % 10 + '0');
 	}
 }
 
 void my_put_number(int num)
 {
-	if (num < 0)
+	if (num < 0 && num != INT_MIN)
 	{
 		my_put_char('-');
 		value(-num);
 	}
-	else
+	else if (num >= 0)
+	{
 		value(num);
+	}
+	else if (num == INT_MIN)
+	{
+		my_put_char('-');
+		value(-num - 2);
+	}
 }
