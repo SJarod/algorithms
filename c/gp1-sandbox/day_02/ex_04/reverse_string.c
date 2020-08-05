@@ -40,7 +40,7 @@ void reverse_string(char const* str)
 	{
 		int lengthVar = string_length(str);
 		
-		for (int i = lengthVar; i > 0; --i)
+		for (int i = lengthVar - 1; i > 0; --i)
 		{
 			my_put_char(*(str + i));
 		}
