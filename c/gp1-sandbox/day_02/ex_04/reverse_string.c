@@ -39,7 +39,7 @@ void reverse_string(char const* str)
 	if (str != NULL)
 	{
 		if (*str == '\0')
-			my_put_char(*str);
+			my_put_char('\0');
 		else
 		{
 			int lengthVar = string_length(str);
