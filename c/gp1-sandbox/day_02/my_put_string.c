@@ -11,9 +11,10 @@ void my_put_string(char const* str)
 {
 	if (str != NULL)
 	{
-		for (int i = 0; i < 5; ++i)
+		while (*str != '\0')
 		{
-			my_put_char(*(str + i));
+			my_put_char(*(str));
+			++str;
 		}
 	}
 }
