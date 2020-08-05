@@ -38,17 +38,16 @@ void reverse_string(char const* str)
 {
 	if (str != NULL)
 	{
-		if (*str == '\0')
-			my_put_char('\0');
-		else
+		int lengthVar = string_length(str);
+
+		for (int i = lengthVar - 1; i > 0; --i)
 		{
-			int lengthVar = string_length(str);
-		
-			for (int i = lengthVar - 1; i > 0; --i)
-			{
+			if (*str == '\0')
+				my_put_char(*str);
+			else
 				my_put_char(*(str + i));
-			}
-			my_put_char(*str);
 		}
+		if (*str != '\0')
+			my_put_char(*str);
 	}
 }
