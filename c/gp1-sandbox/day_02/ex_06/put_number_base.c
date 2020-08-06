@@ -6,38 +6,63 @@
 
 void put_numbase(int number, char const* base)
 {
-	if (base != NULL)
+	if (base != NULL || string_length(base) != 1)
 	{
-		int lengthVar = string_length(base);
-		//int nlength = string_length(base);
-		//int sym[string_length(base)];
-		int ndiv = number;
-		int Ndiv = 0;
-		int modulo = 0;
-
-		//while ()
-		//{
-		//	sym[] = base[];
-		//}
-
-		while (ndiv != 0)
+		if (string_length(base) == 1)
 		{
-			ndiv /= lengthVar;
-			++Ndiv;
-		}
-		
-		for (int i = Ndiv - 1; i > 0; --i)
-		{
-			int result = number;
-
-			for (int j = i; j > 0; --j)
+			int count = 0;
+			
+			if (number < 0)
 			{
-				result /= lengthVar;
+				my_put_char('-');
+				number = -number;
 			}
 
-			modulo = result % lengthVar;
-			my_put_char(base[modulo]);
+			while (count < number)
+			{
+				my_put_char(base[0]);
+				++count;
+			}
 		}
-		my_put_char(base[number % lengthVar]);
+		else
+		{
+			int lengthVar = string_length(base);
+			//int nlength = string_length(base);
+			//int sym[string_length(base)];
+			int ndiv = number;
+			int Ndiv = 0;
+			int modulo = 0;
+
+			if (number < 0)
+			{
+				my_put_char('-');
+				number = -number;
+			}
+
+			//while ()
+			//{
+			//	sym[] = base[];
+			//}
+
+			while (ndiv != 0)
+			{
+				ndiv /= lengthVar;
+				++Ndiv;
+			}
+			
+			for (int i = Ndiv - 1; i > 0; --i)
+			{
+				int result = number;
+	
+				for (int j = i; j > 0; --j)
+				{
+					result /= lengthVar;
+				}
+	
+				modulo = result % lengthVar;
+				my_put_char(base[modulo]);
+			}
+			my_put_char(base[number % lengthVar]);
+		}
 	}
 }
