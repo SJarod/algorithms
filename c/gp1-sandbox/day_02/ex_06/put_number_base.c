@@ -19,7 +19,7 @@ void put_numbase(int number, char const* base)
 				number = -number;
 			}
 
-			while (count < number)
+			while (count <= number)
 			{
 				my_put_char(base[0]);
 				++count;
