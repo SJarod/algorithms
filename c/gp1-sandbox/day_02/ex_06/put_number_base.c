@@ -6,8 +6,9 @@
 
 void put_numbase(int number, char const* base)
 {
-	if (base != NULL || string_length(base) != 1)
+	if (base != NULL)
 	{
+		if (string_length(base) != 0){
 		if (string_length(base) == 1)
 		{
 			int count = 0;
@@ -63,6 +64,7 @@ void put_numbase(int number, char const* base)
 				my_put_char(base[modulo]);
 			}
 			my_put_char(base[number % lengthVar]);
+		}
 		}
 	}
 }
