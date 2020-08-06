@@ -1,5 +1,5 @@
 #include "alpha_to_number.h"
-//#include "my_put_number.h"
+#include "my_put_number.h"
 
 #include <stddef.h>
 #include <stdio.h>
@@ -30,6 +30,9 @@ int alpha_to_number(char const* str)
 	int lengthVar = string_length(str);
 	int num, num2 = 0;
 	int n;
+	
+	if (str == NULL)
+		return 0;
 
 	if (str[0] == '-')
 		n = 1;
