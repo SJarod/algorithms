@@ -24,7 +24,7 @@ int string_compare(char const* str1, char const* str2)
 					return -1;
 				else if (str1[n] > str2[n])
 					return 1;
-				else
+				else if (str1[length1 - 1] == str2[length1 - 1])
 					return 0;
 			}
 		}
