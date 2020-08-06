@@ -1,5 +1,5 @@
 #include "alpha_to_number.h"
-#include "my_put_number.h"
+//#include "my_put_number.h"
 
 #include <stddef.h>
 #include <stdio.h>
