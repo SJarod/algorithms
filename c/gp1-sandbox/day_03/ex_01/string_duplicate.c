@@ -12,8 +12,8 @@ char* string_duplicate(char const* str)
 
 	char* strDuplicate;
 
-	strDuplicate = malloc(string_length(str) * sizeof(char));
-	string_sized_copy(strDuplicate, str, string_length(str));
+	strDuplicate = malloc((string_length(str) + 1) * sizeof(char));
+	string_sized_copy(strDuplicate, str, string_length(str) + 1);
 
 	return strDuplicate;
 }
