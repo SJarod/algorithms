@@ -1,6 +1,7 @@
 #include "int_to_alpha.h"
 
 #include <stdlib.h>
+#include <limits.h>
 
 unsigned int num_length(int num)
 {
@@ -22,6 +23,14 @@ char* int_to_alpha(int num)
 	int negative = 0;
 	if (num < 0)
 	{
+		if (num == INT_MIN)
+		{
+			char* str;
+			str = malloc(12 * sizeof(char));
+			str = "-2147483648";
+			return str;
+		}
+
 		negative = 1;
 		num = -num;
 	}
