@@ -7,6 +7,9 @@
 
 char* string_duplicate(char const* str)
 {
+	if (str == 0)
+		return 0;
+
 	char* strDuplicate;
 
 	strDuplicate = malloc(string_length(str) * sizeof(char));
