@@ -51,7 +51,7 @@ void enemy_destruct(struct s_enemy* enemy)
 
 	my_put_string(enemy->name);
 	my_put_string(" died.");
-	my_put_string("\n\0");
+	my_put_string("\n");
 
 	free(enemy->name);
 	free(enemy->cry);
