@@ -1,12 +1,13 @@
 #include "my_put_number.h"
+#include "my_put_string.h"
 
 #include <stdio.h>
 #include <limits.h>
 
-void my_put_char(char c)
-{
-	fwrite(&c, sizeof(char), 1, stdout);
-}
+//void my_put_char(char c)
+//{
+//	fwrite(&c, sizeof(char), 1, stdout);
+//}
 
 void value(int num)
 {

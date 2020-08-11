@@ -10,6 +10,8 @@ typedef struct s_enemy
 
 } t_enemy;
 
+typedef struct s_player t_player;
+
 void enemy_construct(struct s_enemy* enemy, int life, int attack, char* name, char* cry);
 void enemy_cry(const t_enemy* enemy);
 void enemy_attack(const t_enemy* enemy, struct s_player* player);

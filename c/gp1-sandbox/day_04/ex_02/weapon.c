@@ -9,20 +9,20 @@ t_weapon* create_weapon(char* name, int damage)
 	if (name == NULL)
 		return NULL;
 	
-	t_weapon weapon;
-	weapon->name = malloc((string_length(name) + 1) * sizeof(char));
+	t_weapon* weapon_ptr = malloc(sizeof(t_weapon));	//not to return NULL
+	weapon_ptr->name = malloc((string_length(name) + 1) * sizeof(char));
 
-	for (int i = 0; i <= string_length(name); ++i)
+	for (unsigned int i = 0; i <= string_length(name); ++i)
 	{
-		weapon->name[i] = name[i];
+		weapon_ptr->name[i] = name[i];
 	}
 
-	weapon->damage = damage;
+	weapon_ptr->damage = damage;
 
-	my_put_string(weapon->name);
+	my_put_string(weapon_ptr->name);
 	my_put_string(" spawned\n");
 
-	return weapon;
+	return weapon_ptr;
 }
 
 void weapon_destruct(t_weapon* weapon)

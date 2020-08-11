@@ -2,6 +2,7 @@
 #include "player.h"
 #include "my_put_string.h"
 #include "weapon.h"
+#include "string_length.h"
 
 #include <stdlib.h>
 
@@ -9,7 +10,7 @@ void player_construct(struct s_player* player,
 		      int life,
 		      int armor,
 		      char* name,
-		      char* shout);
+		      char* shout)
 {
 	if (player == NULL)
 		return;
@@ -21,12 +22,12 @@ void player_construct(struct s_player* player,
 	player->name = malloc((string_length(name) + 1) * sizeof(char));
 	player->shout = malloc((string_length(shout) + 1) * sizeof(char));
 
-	for (int i = 0; i <= string_length(name); ++i)
+	for (unsigned int i = 0; i <= string_length(name); ++i)
 	{
 		player->name[i] = name[i];
 	}
 
-	for (int i = 0; i <= string_length(shout); ++i)
+	for (unsigned int i = 0; i <= string_length(shout); ++i)
 	{
 		player->shout[i] = shout[i];
 	}
@@ -35,6 +36,7 @@ void player_construct(struct s_player* player,
 	player->armor = armor;
 	player->haveWeapon = 0;
 	player->damage = 0;
+	player->weapon = NULL;
 
 	my_put_string(player->name);
 	my_put_string(": ");
@@ -47,6 +49,7 @@ void player_shout(const t_player* player)
 		return;
 
 	my_put_string(player->shout);
+	my_put_string("\n");
 }
 
 void player_attack(const t_player* player, struct s_enemy* enemy)
@@ -77,12 +80,15 @@ void player_pickup_weapon(struct s_player* player, t_weapon* weapon)
 	if (weapon == NULL)
 		return;
 
+	player->weapon = weapon;
+
 	my_put_string(player->name);
 	my_put_string(": Yeah! I found a ");
 	my_put_string(weapon->name);
 	my_put_string("!\n");
 
-	player->damage += weapon->damage;
+	player->haveWeapon = 1;
+	player->damage = weapon->damage;
 }
 
 void player_destruct(struct s_player* player)
@@ -91,10 +97,13 @@ void player_destruct(struct s_player* player)
 		return;
 
 	my_put_string(player->name);
-	my_put_string(" put his");
-	//my_put_string(weapon->name);
+	my_put_string(" put his ");
+	my_put_string(player->weapon->name);
 	my_put_string(" away and retired after doing great deeds.");
+	my_put_string("\n");
 
+	free(player->weapon->name);
+	free(player->weapon);
 	free(player->name);
 	free(player->shout);
 }
