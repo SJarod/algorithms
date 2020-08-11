@@ -1,5 +1,5 @@
 #include "my_put_number.h"
-#include "my_put_string.h"
+#include "my_put_char.h"
 
 #include <stdio.h>
 #include <limits.h>
