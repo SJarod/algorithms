@@ -48,6 +48,8 @@ void player_shout(const t_player* player)
 	if (player == NULL)
 		return;
 
+	my_put_string(player->name);
+	my_put_string(": ");
 	my_put_string(player->shout);
 	my_put_string("\n");
 }
@@ -68,7 +70,9 @@ void player_attack(const t_player* player, struct s_enemy* enemy)
 	else
 	{
 		my_put_string(player->name);
-		my_put_string(": You'll die first!\n");
+		my_put_string(": ");
+		my_put_string(enemy->name);
+		my_put_string("! You'll die first!\n");
 		enemy->life -= player->damage;
 	}
 }
