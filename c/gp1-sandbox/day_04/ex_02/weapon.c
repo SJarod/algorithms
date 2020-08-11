@@ -20,7 +20,7 @@ t_weapon* create_weapon(char* name, int damage)
 	weapon_ptr->damage = damage;
 
 	my_put_string(weapon_ptr->name);
-	my_put_string(" spawned\n");
+	my_put_string(" spawned.\n");
 
 	return weapon_ptr;
 }
