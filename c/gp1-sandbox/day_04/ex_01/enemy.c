@@ -9,9 +9,17 @@ void enemy_construct(struct s_enemy* enemy, int l, int a, char* n, char* c)
 	if (enemy == 0)
 		return;
 	if (n == 0)
+	{
+		enemy->name = 0;
+		enemy->cry = 0;
 		return;
+	}
 	if (c == 0)
+	{
+		enemy->name = 0;
+		enemy->name = 0;
 		return;
+	}
 
 	enemy->name = malloc(string_length(n) * sizeof(char));
 	enemy->cry = malloc(string_length(c) * sizeof(char));
@@ -37,6 +45,8 @@ void enemy_cry(const t_enemy* enemy)
 {
 	if (enemy == 0)
 		return;
+	if (enemy->name == 0 || enemy->cry == 0)
+		return;
 
 	my_put_string(enemy->name);
 	my_put_string(": ");
@@ -47,6 +57,8 @@ void enemy_cry(const t_enemy* enemy)
 void enemy_destruct(struct s_enemy* enemy)
 {
 	if (enemy == 0)
+		return;
+	if (enemy->name == 0 || enemy->cry == 0)
 		return;
 
 	my_put_string(enemy->name);
