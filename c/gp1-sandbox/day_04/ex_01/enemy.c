@@ -3,38 +3,43 @@
 #include "string_length.h"
 
 #include <stdlib.h>
+#include <stddef.h>
 
-void enemy_construct(struct s_enemy* enemy, int l, int a, char* n, char* c)
+void enemy_construct(struct s_enemy* enemy,
+		     int life,
+		     int attack,
+		     char* name,
+		     char* cry)
 {
-	if (enemy == 0)
+	if (enemy == NULL)
 		return;
-	if (n == 0)
+	if (name == NULL)
 	{
-		enemy->name = 0;
-		enemy->cry = 0;
-		return;
-	}
-	if (c == 0)
-	{
-		enemy->name = 0;
-		enemy->name = 0;
+		enemy->name = NULL;
+		enemy->cry = NULL;
 		return;
 	}
-
-	enemy->name = malloc(string_length(n) * sizeof(char));
-	enemy->cry = malloc(string_length(c) * sizeof(char));
-
-	enemy->life = l;
-	enemy->attack = a;
-
-	for (unsigned int i = 0; i < string_length(n); ++i)
+	if (cry == NULL)
 	{
-		enemy->name[i] = n[i];
+		enemy->name = NULL;
+		enemy->name = NULL;
+		return;
 	}
 
-	for (unsigned int i = 0; i < string_length(c); ++i)
+	enemy->name = malloc((string_length(name) + 1) * sizeof(char));
+	enemy->cry = malloc((string_length(cry) + 1) * sizeof(char));
+
+	enemy->life = life;
+	enemy->attack = attack;
+
+	for (unsigned int i = 0; i <= string_length(name); ++i)
 	{
-		enemy->cry[i] = c[i];
+		enemy->name[i] = name[i];
+	}
+
+	for (unsigned int i = 0; i <= string_length(cry); ++i)
+	{
+		enemy->cry[i] = cry[i];
 	}
 	
 	my_put_string(enemy->name);
@@ -43,10 +48,12 @@ void enemy_construct(struct s_enemy* enemy, int l, int a, char* n, char* c)
 
 void enemy_cry(const t_enemy* enemy)
 {
-	if (enemy == 0)
+	if (enemy == NULL)
 		return;
-	if (enemy->name == 0 || enemy->cry == 0)
+	if (enemy->name == NULL || enemy->cry == NULL)
+	{
 		return;
+	}
 
 	my_put_string(enemy->name);
 	my_put_string(": ");
@@ -56,12 +63,10 @@ void enemy_cry(const t_enemy* enemy)
 
 void enemy_destruct(struct s_enemy* enemy)
 {
-	if (enemy == 0)
+	if (enemy == NULL)
 		return;
-	if (enemy->name == 0 || enemy->cry == 0)
+	if (enemy->name == NULL || enemy->cry == NULL)
 	{
-		free(enemy->name);
-		free(enemy->cry);
 		return;
 	}
 
