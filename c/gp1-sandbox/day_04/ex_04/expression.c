@@ -92,6 +92,7 @@ char const* consume_operand(char const* str, int* number)
 	int op_in_nextStr = 0;
 	int is_letter = 0;
 	int letter_location = 0;
+	int end_of_string = 0;
 
 	for (unsigned int i = 0; i < string_length(str) + 1; ++i)
 	{
@@ -162,6 +163,8 @@ char const* consume_operand(char const* str, int* number)
 			{
 				strNumber[j] = 0;
 			}
+
+			end_of_string = 1;
 		}
 	}
 	//my_put_string(strNumber);
@@ -170,6 +173,10 @@ char const* consume_operand(char const* str, int* number)
 	//my_put_char('\n');
 	//free((char*)str);
 	free(strNumber);
+
+	if (end_of_string == 1)
+		return strNumber;
+
 	return &nextStr[op_location];
 }
 
@@ -217,9 +224,9 @@ void execute_expression(char const* str)
 	{
 		if (str[i] < '0' || str[i] > '9')
 		{
-			if (str[i] != '+' || str[i] != '-' || str[i] != '*' || str[i] != '/')
+			if (str[i] != '+' && str[i] != '-' && str[i] != '*' && str[i] != '/')
 			{
-				my_put_string("Expression is invalid");
+				my_put_string("Expression is invalid\n");
 				return;
 			}
 		}
