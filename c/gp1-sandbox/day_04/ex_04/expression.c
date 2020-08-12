@@ -55,6 +55,8 @@ char const* consume_operator(char const* str, char* operator)
 	}
 	//my_put_string(&nextStr[op_location + 1]);
 	//my_put_char('\n');
+	//free((char*)str);
+	//free((char*)nextStr);
 	return &nextStr[op_location + 1];
 }
 
@@ -66,7 +68,7 @@ char const* consume_operand(char const* str, int* number)
 		return NULL;
 
 	char* strNumber;
-	//strNumber = malloc(string_length(str) * sizeof(char));
+	strNumber = malloc(string_length(str) * sizeof(char));
 	int op_location = 0;
 	int op_in_nextStr = 0;
 
@@ -85,7 +87,7 @@ char const* consume_operand(char const* str, int* number)
 		{
 			//string_sized_copy(strNumber, str, i);
 
-			strNumber = malloc(i * sizeof(char));
+			//strNumber = malloc(i * sizeof(char));
 
 			for (int j = 0; j < op_location; j++)
 			{
@@ -96,7 +98,7 @@ char const* consume_operand(char const* str, int* number)
 		}
 		else
 		{
-			strNumber = malloc(i * sizeof(char));
+			//strNumber = malloc(i * sizeof(char));
 
 			for (unsigned int j = 0; j < i; ++j)
 			{
@@ -110,6 +112,7 @@ char const* consume_operand(char const* str, int* number)
 	//my_put_char('\n');
 	//my_put_number(*number);
 	//my_put_char('\n');
+	//free((char*)str);
 	free(strNumber);
 	return &str[op_location];
 }
@@ -129,6 +132,7 @@ int parse_expression(char const* str, int* left_operand, char* operator, int* ri
 	char const* nextStr = consume_operator(str, operator);
 	consume_operand(nextStr, right_operand);
 
+	//free((char*)nextStr);
 	return 1;
 }
 
@@ -144,4 +148,6 @@ void execute_expression(char const* str)
 	parse_expression(str, &num1, &operator, &num2);
 
 	execute_operation(num1, operator, num2);
+
+	//free((char*)str);
 }
