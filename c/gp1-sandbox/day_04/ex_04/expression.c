@@ -90,11 +90,33 @@ char const* consume_operand(char const* str, int* number)
 	strNumber = malloc(string_length(str) * sizeof(char));
 	int op_location = 0;
 	int op_in_nextStr = 0;
+	int is_letter = 0;
+	int letter_location = 0;
 
 	for (unsigned int i = 0; i < string_length(str) + 1; ++i)
 	{
 		//if (str[i] == '\0')
 		//	return NULL;
+
+		for (unsigned int j = 0; j < string_length(str) + 1; ++j)
+		{
+			if (str[j] < '0' || str[j] > '9')
+			{
+				is_letter = 1;
+				letter_location = j;
+			}
+		}
+
+		if (is_letter == 1)
+		{
+			for (int j = 0; j < letter_location; ++j)
+			{
+				strNumber[j] = str[j];
+			}
+
+			free(strNumber);
+			return &nextStr[letter_location];
+		}
 
 		if (str[i] == '+' || str[i] == '-' || str[i] == '*' || str[i] == '/'/* || str[i] == '\0'*/)
 		{
