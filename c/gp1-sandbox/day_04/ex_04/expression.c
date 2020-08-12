@@ -98,12 +98,13 @@ char const* consume_operand(char const* str, int* number)
 		//if (str[i] == '\0')
 		//	return NULL;
 
-		for (unsigned int j = 0; j < string_length(str) + 1; ++j)
+		for (unsigned int j = 0; j < string_length(str); ++j)
 		{
 			if (str[j] < '0' || str[j] > '9')
 			{
 				is_letter = 1;
 				letter_location = j;
+				break;
 			}
 		}
 
@@ -114,6 +115,10 @@ char const* consume_operand(char const* str, int* number)
 				strNumber[j] = str[j];
 			}
 
+			*number = alpha_to_number(strNumber);
+
+			//my_put_number(*number);
+			//my_put_string(&nextStr[letter_location]);
 			free(strNumber);
 			return &nextStr[letter_location];
 		}
@@ -152,6 +157,11 @@ char const* consume_operand(char const* str, int* number)
 			}
 
 			*number = alpha_to_number(strNumber);
+
+			for (unsigned int j = 0; j < string_length(str); ++j)
+			{
+				strNumber[j] = 0;
+			}
 		}
 	}
 	//my_put_string(strNumber);
@@ -173,10 +183,26 @@ int parse_expression(char const* str, int* left_operand, char* operator, int* ri
 		return 0;
 	if (right_operand == NULL)
 		return 0;
+	for (unsigned int i = 0; i < string_length(str) + 1; ++i)
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return 0;
+	}
 
 	char const* nextStr = consume_operand(str, left_operand);
+
+	if (nextStr == NULL)
+		return 0;
+
 	nextStr = consume_operator(nextStr, operator);
+
+	if (nextStr == NULL)
+		return 0;
+
 	consume_operand(nextStr, right_operand);
+
+	if (nextStr == NULL)
+		return 0;
 
 	//free((char*)nextStr);
 	return 1;
@@ -186,6 +212,18 @@ void execute_expression(char const* str)
 {
 	if (str == 0)
 		return;
+
+	for (unsigned int i = 0; i < string_length(str) + 1; ++i)
+	{
+		if (str[i] < '0' || str[i] > '9')
+		{
+			if (str[i] != '+' || str[i] != '-' || str[i] != '*' || str[i] != '/')
+			{
+				my_put_string("Expression is invalid");
+				return;
+			}
+		}
+	}
 
 	char operator;
 	int num1;
