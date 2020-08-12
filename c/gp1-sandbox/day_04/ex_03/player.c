@@ -114,7 +114,7 @@ void player_take_potion(struct s_player* player, enum potion potion)
 		{
 			my_put_string(player->name);
 			my_put_string(": Feels better!\n");
-			player->life = 100;
+			player->life += 14;
 			break;
 		}
 	
