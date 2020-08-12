@@ -19,9 +19,19 @@ char const* consume_operator(char const* str, char* operator)
 	char const* nextStr = str;
 
 	int op_location = 0;
+	int have_valid_op = 0;
 
 	for (unsigned int i = 0; i < string_length(str) + 1; ++i)
 	{
+		for (unsigned int j = 0; j < string_length(str) + 1; ++j)
+		{
+			if (str[j] == '+' || str[j] == '-' || str[j] == '*' || str[j] == '/')
+				have_valid_op = 1;
+		}
+
+		if (have_valid_op == 0)
+			return NULL;
+
 		if (str[i] == '+' || str[i] == '-' || str[i] == '*' || str[i] == '/')
 		{
 			op_location = i;
@@ -48,10 +58,18 @@ char const* consume_operator(char const* str, char* operator)
 					*operator = '/';
 					break;
 				}
+			default:
+				{
+					//my_put_string("Expression is invalid\n");
+					//return NULL;
+				}
 			}
 		}
-		//else
-		//	return NULL;
+		else
+		{
+			//my_put_string("Expression is invalid\n");
+			//return NULL;
+		}
 	}
 	//my_put_string(&nextStr[op_location + 1]);
 	//my_put_char('\n');
@@ -67,6 +85,7 @@ char const* consume_operand(char const* str, int* number)
 	if (number == NULL)
 		return NULL;
 
+	char const* nextStr = str;
 	char* strNumber;
 	strNumber = malloc(string_length(str) * sizeof(char));
 	int op_location = 0;
@@ -82,6 +101,11 @@ char const* consume_operand(char const* str, int* number)
 			op_in_nextStr = 1;
 			op_location = i;
 		}
+		else
+		{
+			//my_put_string("Expression is invalid\n");
+			//return NULL;
+		}
 
 		if (op_in_nextStr == 1)
 		{
@@ -89,7 +113,7 @@ char const* consume_operand(char const* str, int* number)
 
 			//strNumber = malloc(i * sizeof(char));
 
-			for (int j = 0; j < op_location; j++)
+			for (int j = 0; j < op_location; ++j)
 			{
 				strNumber[j] = str[j];
 			}
@@ -114,7 +138,7 @@ char const* consume_operand(char const* str, int* number)
 	//my_put_char('\n');
 	//free((char*)str);
 	free(strNumber);
-	return &str[op_location];
+	return &nextStr[op_location];
 }
 
 int parse_expression(char const* str, int* left_operand, char* operator, int* right_operand)
@@ -128,8 +152,8 @@ int parse_expression(char const* str, int* left_operand, char* operator, int* ri
 	if (right_operand == NULL)
 		return 0;
 
-	consume_operand(str, left_operand);
-	char const* nextStr = consume_operator(str, operator);
+	char const* nextStr = consume_operand(str, left_operand);
+	nextStr = consume_operator(nextStr, operator);
 	consume_operand(nextStr, right_operand);
 
 	//free((char*)nextStr);
