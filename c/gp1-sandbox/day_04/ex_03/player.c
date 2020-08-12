@@ -120,6 +120,9 @@ void player_take_potion(struct s_player* player, enum potion potion)
 	
 	case E_POWER_POTION:
 		{
+			if (player->haveWeapon == 0)
+				break;
+
 			my_put_string(player->name);
 			my_put_string(": So powerful!\n");
 			player->damage *= 10;
