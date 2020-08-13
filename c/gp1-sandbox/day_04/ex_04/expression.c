@@ -190,11 +190,17 @@ int parse_expression(char const* str, int* left_operand, char* operator, int* ri
 		return 0;
 	if (right_operand == NULL)
 		return 0;
-	for (unsigned int i = 0; i < string_length(str) + 1; ++i)
+
+	/*for (unsigned int i = 0; i < string_length(str) + 1; ++i)
 	{
 		if (str[i] < '0' || str[i] > '9')
-			return 0;
-	}
+		{
+			if (str[i] != '+' && str[i] != '-' && str[i] != '*' && str[i] != '/')
+			{
+				return 0;
+			}
+		}
+	}*/
 
 	char const* nextStr = consume_operand(str, left_operand);
 
@@ -206,7 +212,7 @@ int parse_expression(char const* str, int* left_operand, char* operator, int* ri
 	if (nextStr == NULL)
 		return 0;
 
-	consume_operand(nextStr, right_operand);
+	nextStr = consume_operand(nextStr, right_operand);
 
 	if (nextStr == NULL)
 		return 0;
@@ -217,26 +223,34 @@ int parse_expression(char const* str, int* left_operand, char* operator, int* ri
 
 void execute_expression(char const* str)
 {
-	if (str == 0)
+	if (str == NULL)
 		return;
 
-	for (unsigned int i = 0; i < string_length(str) + 1; ++i)
+	/*for (unsigned int i = 0; i < string_length(str) + 1; ++i)
 	{
 		if (str[i] < '0' || str[i] > '9')
 		{
-			if (str[i] != '+' && str[i] != '-' && str[i] != '*' && str[i] != '/')
+			if (str[i] == '+' || str[i] == '-' || str[i] == '*' || str[i] == '/')
+				break;
+			else
 			{
 				my_put_string("Expression is invalid\n");
 				return;
 			}
 		}
-	}
+	}*/
 
 	char operator;
 	int num1;
 	int num2;
 
-	parse_expression(str, &num1, &operator, &num2);
+	int test = parse_expression(str, &num1, &operator, &num2);
+
+	if (test == 0)
+	{
+		my_put_string("Expression is invalid\n");
+		return;
+	}
 
 	execute_operation(num1, operator, num2);
 
