@@ -29,7 +29,7 @@ void crate_explosion_event(void* p_entity, char const* explosion_name, t_positio
 	    crate->position.x > p_position->x - p_position->radius &&
 	    crate->position.y < p_position->y + p_position->radius &&
 	    crate->position.y > p_position->y - p_position->radius)*/
-	if (collision_happens(&crate->position, p_position) == 1)
+	if (collision_happens(crate->position, p_position) == 1)
 	{
 		crate->is_alive = 0;
 		my_put_string(crate->name);
@@ -50,8 +50,8 @@ void spawn_crate(char const* name, float x, float y)
 	crate = malloc(sizeof(t_crate));
 
 	crate->name = name;
-	crate->position.x = x;
-	crate->position.y = y;
-	crate->position.radius = 0.4f;
+	crate->position->x = x;
+	crate->position->y = y;
+	crate->position->radius = 0.4f;
 	add_entity(crate, crate_explosion_event);
 }

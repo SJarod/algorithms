@@ -26,7 +26,7 @@ void barrel_explosion_event(void* p_entity, char const* explosion_name, t_positi
 	    barrel->pos.x > p_position->x - p_position->radius &&
 	    barrel->pos.y < p_position->y + p_position->radius &&
 	    barrel->pos.y > p_position->y - p_position->radius)*/
-	if (collision_happens(&barrel->pos, p_position) == 1)
+	if (collision_happens(barrel->pos, p_position) == 1)
 	{
 		my_put_string("Barrel ");
 		my_put_string(barrel->name);
@@ -35,7 +35,7 @@ void barrel_explosion_event(void* p_entity, char const* explosion_name, t_positi
 		my_put_string("!\n");
 
 		barrel->is_exploded = 1;
-		barrel->pos.radius = 10;
+		barrel->pos->radius = 10;
 	}
 }
 
@@ -48,9 +48,9 @@ void spawn_barrel(char const* name, float x, float y)
 	barrel = malloc(sizeof(t_barrel));
 
 	barrel->name = name;
-	barrel->pos.x = x;
-	barrel->pos.y = y;
-	barrel->pos.radius = 0.2f;
+	barrel->pos->x = x;
+	barrel->pos->y = y;
+	barrel->pos->radius = 0.2f;
 
 	add_entity(barrel, barrel_explosion_event);
 }

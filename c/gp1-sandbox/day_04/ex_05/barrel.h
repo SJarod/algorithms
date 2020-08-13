@@ -6,7 +6,7 @@ typedef struct s_position t_position;
 typedef struct s_barrel
 {
 	char const* name;
-	t_position pos;
+	t_position* pos;
 	int is_exploded;
 
 } t_barrel;

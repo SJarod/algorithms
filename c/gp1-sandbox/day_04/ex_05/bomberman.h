@@ -6,7 +6,7 @@ typedef struct s_position t_position;
 typedef struct s_bomberman
 {
 	char const* name;
-	t_position pos;
+	t_position* pos;
 	int life;
 
 } t_bomberman;

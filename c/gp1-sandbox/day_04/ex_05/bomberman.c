@@ -26,7 +26,7 @@ void bomberman_explosion_event(void* p_entity, char const* explosion_name, t_pos
 	    bomberman->pos.x > p_position->x - p_position->radius &&
 	    bomberman->pos.y < p_position->y + p_position->radius &&
 	    bomberman->pos.y > p_position->y - p_position->radius)*/
-	if (collision_happens(&bomberman->pos, p_position) == 1)
+	if (collision_happens(bomberman->pos, p_position) == 1)
 	{
 		bomberman->life -= 10;
 		my_put_string(bomberman->name);
@@ -51,9 +51,9 @@ void spawn_bomberman(char const* name, float x, float y)
 	bomberman = malloc(sizeof(t_bomberman));
 
 	bomberman->name = name;
-	bomberman->pos.x = x;
-	bomberman->pos.y = y;
-	bomberman->pos.radius = 1.0f;
+	bomberman->pos->x = x;
+	bomberman->pos->y = y;
+	bomberman->pos->radius = 1.0f;
 	bomberman->life = 20;
 
 	add_entity(bomberman, bomberman_explosion_event);
