@@ -26,7 +26,12 @@ char const* consume_operator(char const* str, char* operator)
 		for (unsigned int j = 0; j < string_length(str) + 1; ++j)
 		{
 			if (str[j] == '+' || str[j] == '-' || str[j] == '*' || str[j] == '/')
-				have_valid_op = 1;
+			{
+				if (str[j + 1] == '\0')
+					have_valid_op = 0;
+				else
+					have_valid_op = 1;
+			}
 		}
 
 		if (have_valid_op == 0)
@@ -245,6 +250,7 @@ void execute_expression(char const* str)
 	int num2;
 
 	int test = parse_expression(str, &num1, &operator, &num2);
+	//my_put_number(test);
 
 	if (test == 0)
 	{
