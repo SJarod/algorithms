@@ -6,7 +6,7 @@ typedef struct s_position t_position;
 typedef struct s_crate
 {
 	char const* name;
-	t_position* position;
+	t_position* pos;
 	int is_alive;
 
 } t_crate;

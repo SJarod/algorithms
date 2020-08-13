@@ -38,8 +38,14 @@ void bomberman_explosion_event(void* p_entity, char const* explosion_name, t_pos
 		{
 			my_put_string(bomberman->name);
 			my_put_string(" is dead!\n");
+
+			//free(bomberman->pos);
+			//free(bomberman);
 		}
 	}
+
+	//free(bomberman->pos);
+	//free(bomberman);
 }
 
 void spawn_bomberman(char const* name, float x, float y)
@@ -49,6 +55,7 @@ void spawn_bomberman(char const* name, float x, float y)
 
 	t_bomberman* bomberman;
 	bomberman = malloc(sizeof(t_bomberman));
+	bomberman->pos = malloc(sizeof(t_position));
 
 	bomberman->name = name;
 	bomberman->pos->x = x;
@@ -57,4 +64,7 @@ void spawn_bomberman(char const* name, float x, float y)
 	bomberman->life = 20;
 
 	add_entity(bomberman, bomberman_explosion_event);
+
+	//free(bomberman->pos);
+	//free(bomberman);
 }
