@@ -39,8 +39,8 @@ void barrel_explosion_event(void* p_entity, char const* explosion_name, t_positi
 
 		send_explosion_event(barrel, barrel->name, barrel->pos);
 
-		//free(barrel->pos);
-		//free(barrel);
+		free(barrel->pos);
+		free(barrel);
 	}
 
 	//free(barrel->pos);

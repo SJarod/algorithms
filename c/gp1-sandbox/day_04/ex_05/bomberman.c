@@ -39,8 +39,8 @@ void bomberman_explosion_event(void* p_entity, char const* explosion_name, t_pos
 			my_put_string(bomberman->name);
 			my_put_string(" is dead!\n");
 
-			//free(bomberman->pos);
-			//free(bomberman);
+			free(bomberman->pos);
+			free(bomberman);
 		}
 	}
 

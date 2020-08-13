@@ -19,9 +19,6 @@ void crate_explosion_event(void* p_entity, char const* explosion_name, t_positio
 
 	t_crate* crate = p_entity;
 
-	if (crate == NULL)
-		return;
-
 	if (crate->is_alive == 0)
 		return;
 
@@ -37,8 +34,8 @@ void crate_explosion_event(void* p_entity, char const* explosion_name, t_positio
 		my_put_string(explosion_name);
 		my_put_string("!\n");
 
-		//free(crate->position);
-		//free(crate);
+		free(crate->pos);
+		free(crate);
 	}
 
 	//free(crate->position);
@@ -55,6 +52,7 @@ void spawn_crate(char const* name, float x, float y)
 	crate->pos = malloc(sizeof(t_position));
 
 	crate->name = name;
+	crate->is_alive = 1;
 	crate->pos->x = x;
 	crate->pos->y = y;
 	crate->pos->radius = 0.4f;
