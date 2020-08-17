@@ -13,5 +13,8 @@ t_list* list_create(void)
 	myList->head = NULL;
 	myList->tail = NULL;
 
+	if (myList == NULL)
+		return NULL;
+
 	return myList;
 }
