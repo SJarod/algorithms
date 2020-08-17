@@ -9,7 +9,7 @@ void list_insert_next(t_list* list, t_list_node* node, void* data)
 		return;
 
 	++list->size;
-	t_list_node* newNode = node->next;
+	t_list_node* newNode;
 
 	if (node == NULL)
 	{
