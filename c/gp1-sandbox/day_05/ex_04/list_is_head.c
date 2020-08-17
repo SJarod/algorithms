@@ -8,15 +8,11 @@ bool list_node_is_head(t_list const* list, t_list_node const* node)
 {
 	if (list == NULL)
 		return false;
-	if (list == NULL)
+	if (node == NULL)
 		return false;
 
-	int test = 0;
-
-	if (test == list->size)
+	if (list->head->next == node->next)
 		return true;
-
-	list_node_is_head(list, node->next);
-	++test;
-	return false;
+	else
+		return false;
 }

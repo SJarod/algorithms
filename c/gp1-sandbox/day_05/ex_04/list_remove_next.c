@@ -14,6 +14,7 @@ void list_remove_next(t_list* list, t_list_node* node, void** data)
 	*data = node->data;
 
 	free(node->next);
+	free(node);
 
 	--list->size;
 }

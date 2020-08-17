@@ -17,6 +17,7 @@ void list_insert_next(t_list* list, t_list_node* node, void* data)
 		newNode->data = data;
 		newNode->next = list->head;
 		list->head = newNode;
+		list->tail = list->head;
 		return;
 	}
 
