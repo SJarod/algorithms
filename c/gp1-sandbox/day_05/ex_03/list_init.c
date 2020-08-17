@@ -8,8 +8,6 @@ void list_init(t_list* list, int (*compare)(void*, void*), void (*destroy)(void*
 	if (list == NULL)
 		return;
 
-	add_element(list);
-
 	list->compare = compare;
 	list->destroy = destroy;
 }
