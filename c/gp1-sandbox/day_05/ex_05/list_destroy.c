@@ -32,6 +32,7 @@ void list_destroy(t_list** list)
 		(*list)->head->next = temp;
 	}
 
+	(*list)->size = 0;
 	free(*list);
 
 	*list = NULL;
