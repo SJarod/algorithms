@@ -9,11 +9,37 @@ t_list* list_merge(t_list* list1, t_list* list2)
 	if (list2 == NULL)
 		return 0;
 
-	t_list* newList = list_create();
+	t_list*		newList = list_create();
+	t_list_node*	temp = list1->head;
+	int		whichNode;
 
-	newList->head = list1->head;
-	newList->tail = list2->tail;
-	list1->tail->next = list2->head;
+	for (int j = 0; j < list2->size; ++j)
+	{
+		whichNode = list2->size - j;
+		temp = list2->head;
+
+		while (whichNode > 0)
+		{
+			temp = temp->next;
+			--whichNode;
+		}
+
+		list_insert_next(newList, NULL, list_node_data(temp));
+	}
+
+	for (int j = 0; j < list1->size; ++j)
+	{
+		whichNode = list1->size - j;
+		temp = list1->head;
+
+		while (whichNode > 0)
+		{
+			temp = temp->next;
+			--whichNode;
+		}
+
+		list_insert_next(newList, NULL, list_node_data(temp));
+	}
 
 	return newList;
 }
