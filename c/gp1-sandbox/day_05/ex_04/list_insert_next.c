@@ -9,31 +9,35 @@ void list_insert_next(t_list* list, t_list_node* node, void* data)
 		return;
 
 	++list->size;
-	t_list_node* newNode;
+	t_list_node* newNode = malloc(sizeof(t_list_node));
+	newNode->data = data;
 
 	if (node == NULL)
 	{
-		newNode = malloc(sizeof(t_list_node));
-		newNode->data = data;
+		//newNode = malloc(sizeof(t_list_node));
+		//newNode->data = data;
 		newNode->next = list->head;
 		list->head = newNode;
 
-		if (list->size == 1)
+		if (list->head->next == NULL)
+		{
 			list->tail = list->head;
+		}
 
 		return;
 	}
 
-	newNode = malloc(sizeof(t_list_node));
-	newNode->data = data;
-
-	if (node == list->tail)
-	{
-		newNode->next = NULL;
-		list->tail->next = newNode;
-	}
-	else
-		newNode->next = node->next;
-
+	//newNode = malloc(sizeof(t_list_node));
+	//newNode->data = data;
+	newNode->next = node->next;
 	node->next = newNode;
+
+	if (node->next == NULL)
+	{
+		node->next = newNode;
+		newNode->next = NULL;
+		list->tail = newNode;
+	}
+
+	list->tail->next = NULL;
 }
