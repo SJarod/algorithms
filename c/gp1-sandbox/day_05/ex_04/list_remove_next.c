@@ -11,10 +11,20 @@ void list_remove_next(t_list* list, t_list_node* node, void** data)
 	if (node == NULL)
 		return;
 
-	*data = node->data;
+	if (node->next == NULL)
+		return;
 
+	*data = node->next->data;
+
+	if (node->next == list->tail)
+	{
+		node->next = NULL;
+	}
+	else
+	{
+		node->next = node->next->next;
+	}
 	free(node->next);
-	free(node);
 
 	--list->size;
 }
