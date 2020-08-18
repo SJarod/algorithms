@@ -27,6 +27,7 @@ void list_destroy(t_list** list)
 		{
 			free((*list)->head->next);
 			free((*list)->head);
+			break;
 		}
 
 		(*list)->head->next = temp;
