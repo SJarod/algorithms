@@ -5,7 +5,7 @@
 void* list_node_data(t_list_node const* node)
 {
 	if (node == NULL)
-		return 0;
+		return NULL;
 
 	return node->data;
 }

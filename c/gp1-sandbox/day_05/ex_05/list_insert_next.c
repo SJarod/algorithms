@@ -26,15 +26,17 @@ void list_insert_next(t_list* list, t_list_node* node, void* data)
 
 		return;
 	}
-
-	if (node->next == NULL)
+	else if (node->next == NULL)
 	{
 		node->next = newNode;
 		newNode->next = NULL;
 		list->tail = newNode;
+		return;
 	}
-
-	newNode->next = node->next;
-	node->next = newNode;
-	list->tail->next = NULL;
+	else
+	{
+		newNode->next = node->next;
+		node->next = newNode;
+		//list->tail->next = NULL;
+	}
 }

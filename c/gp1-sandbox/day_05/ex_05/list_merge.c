@@ -13,8 +13,6 @@ t_list* list_merge(t_list* list1, t_list* list2)
 	t_list_node*	temp = list1->head;
 	int		whichNode;
 
-	list_init(newList, newList->compare, newList->destroy);
-
 	for (int j = 0; j < list2->size; ++j)
 	{
 		whichNode = list2->size - j - 1;
@@ -26,7 +24,7 @@ t_list* list_merge(t_list* list1, t_list* list2)
 			--whichNode;
 		}
 
-		list_insert_next(newList, NULL, list_node_data(temp));
+		list_insert_next(newList, NULL, temp->data);
 	}
 
 	for (int j = 0; j < list1->size; ++j)
@@ -40,7 +38,7 @@ t_list* list_merge(t_list* list1, t_list* list2)
 			--whichNode;
 		}
 
-		list_insert_next(newList, NULL, list_node_data(temp));
+		list_insert_next(newList, NULL, temp->data);
 	}	
 
 	for (int i = 1; i < list1->size; ++i)

@@ -10,6 +10,8 @@ void list_destroy(t_list** list)
 
 	t_list_node* temp = (*list)->head; //malloc(sizeof(t_list_node));
 
+	(*list)->destroy((*list)->head->data);
+
 	for (int i = 1; i < (*list)->size; ++i)
 	{
 		if ((*list)->head->next == NULL)
@@ -21,10 +23,12 @@ void list_destroy(t_list** list)
 		if ((*list)->head->next->next != NULL)
 		{
 			temp = (*list)->head->next->next;
+			(*list)->destroy((*list)->head->next->data);
 			free((*list)->head->next);
 		}
 		else
 		{
+			(*list)->destroy((*list)->head->next->data);
 			free((*list)->head->next);
 			free((*list)->head);
 			break;
