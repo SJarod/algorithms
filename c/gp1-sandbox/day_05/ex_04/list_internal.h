@@ -8,7 +8,4 @@ typedef void (*destroy)(void*);
 
 typedef struct s_list t_list;
 
-//add one t_list_node sized element to the list: list (which list)
-void add_element(t_list* list);
-
 #endif

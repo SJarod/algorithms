@@ -27,11 +27,6 @@ void list_insert_next(t_list* list, t_list_node* node, void* data)
 		return;
 	}
 
-	//newNode = malloc(sizeof(t_list_node));
-	//newNode->data = data;
-	newNode->next = node->next;
-	node->next = newNode;
-
 	if (node->next == NULL)
 	{
 		node->next = newNode;
@@ -39,5 +34,7 @@ void list_insert_next(t_list* list, t_list_node* node, void* data)
 		list->tail = newNode;
 	}
 
+	newNode->next = node->next;
+	node->next = newNode;
 	list->tail->next = NULL;
 }

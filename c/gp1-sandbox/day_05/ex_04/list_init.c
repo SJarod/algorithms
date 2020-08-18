@@ -11,12 +11,3 @@ void list_init(t_list* list, int (*compare)(void*, void*), void (*destroy)(void*
 	list->compare = compare;
 	list->destroy = destroy;
 }
-
-void add_element(t_list* list)
-{
-	if (list == NULL)
-		return;
-
-	list->size += 1;
-	list->head = malloc(sizeof(t_list_node));
-}
