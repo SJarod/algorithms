@@ -1,51 +1,73 @@
 #include "list.h"
+#include "list_internal.h"
 
 #include <stdlib.h>
 
 t_list* list_merge(t_list* list1, t_list* list2)
 {
 	if (list1 == NULL)
-		return 0;
+		return NULL;
 	if (list2 == NULL)
-		return 0;
+		return NULL;
 
 	t_list*		newList = list_create();
-	t_list_node*	temp = list1->head;
-	int		whichNode;
+	t_list*		tempList = list1;		//which list
+	t_list_node*	temp = tempList->head->next;	//which node to pass and free
+	t_list_node*	tempCur = tempList->head->next;	//which node to pass to list head
+	t_list_node*	newTemp = newList->head;	//which node of the new list
+	int		newListSize = list1->size + list2->size;
 
-	for (int j = 0; j < list2->size; ++j)
+	newList->head = malloc(sizeof(t_list_node));
+	newTemp = newList->head;
+	newList->head->data = list1->head->data;
+	newList->size = newListSize;
+
+	for (int i = 0; i < newListSize - 1; ++i)
 	{
-		whichNode = list2->size - j - 1;
-		temp = list2->head;
-
-		while (whichNode > 0)
+		if (temp->next == NULL)
 		{
-			temp = temp->next;
-			--whichNode;
-		}
+			t_list_node* newNode = malloc(sizeof(t_list_node));
+			newNode->next = NULL;
+			newTemp->next = newNode;
+			newNode->data = temp->data;
 
-		list_insert_next(newList, NULL, temp->data);
+			tempList = list2;
+			tempCur = tempList->head;
+			temp = tempCur;
+			newTemp = newTemp->next;
+
+			newList->tail = newNode;
+		}
+		else if (temp->next != NULL)
+		{
+			t_list_node* newNode = malloc(sizeof(t_list_node));
+			newNode->next = NULL;
+			newTemp->next = newNode;
+			newNode->data = temp->data;
+
+			//free(temp);
+			tempCur = tempCur->next;
+			temp = tempCur;
+			newTemp = newTemp->next;
+
+			newList->tail = newNode;
+		}
 	}
 
-	for (int j = 0; j < list1->size; ++j)
-	{
-		whichNode = list1->size - j - 1;
-		temp = list1->head;
+	t_list_node* newNode = malloc(sizeof(t_list_node));
+	newNode->next = NULL;
+	newList->tail->next = newNode;
+	newNode->data = list2->tail->data;
+	newList->tail = newNode;
 
-		while (whichNode > 0)
-		{
-			temp = temp->next;
-			--whichNode;
-		}
-
-		list_insert_next(newList, NULL, temp->data);
-	}	
+	temp = list1->head;
 
 	for (int i = 1; i < list1->size; ++i)
 	{
 		if (list1->head->next == NULL)
 		{
 			list1->head = NULL;
+			//free(list1->head);
 			break;
 		}
 
@@ -56,7 +78,7 @@ t_list* list_merge(t_list* list1, t_list* list2)
 		}
 		else
 		{
-			//free(list1->head->next);
+			list1->destroy(list1->head->data);
 			free(list1->head);
 		}
 
@@ -64,13 +86,14 @@ t_list* list_merge(t_list* list1, t_list* list2)
 	}
 
 	free(list1->head);
-	list1->size = 0;
+	temp = list2->head;
 
 	for (int i = 1; i < list2->size; ++i)
 	{
 		if (list2->head->next == NULL)
 		{
 			list2->head = NULL;
+			//free(list2->head);
 			break;
 		}
 
@@ -81,7 +104,7 @@ t_list* list_merge(t_list* list1, t_list* list2)
 		}
 		else
 		{
-			//free(list2->head->next);
+			list2->destroy(list2->head->data);
 			free(list2->head);
 		}
 
@@ -89,6 +112,11 @@ t_list* list_merge(t_list* list1, t_list* list2)
 	}
 
 	free(list2->head);
+
+	free(newNode);
+	//free(newTemp);
+
+	list1->size = 0;
 	list2->size = 0;
 
 	return newList;

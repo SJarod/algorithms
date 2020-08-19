@@ -16,6 +16,7 @@ void list_destroy(t_list** list)
 
 	t_list_node* temp = (*list)->head; //malloc(sizeof(t_list_node));
 
+
 	//(*list)->destroy((*list)->head->data);
 
 	for (int i = 1; i < (*list)->size; ++i)
