@@ -44,7 +44,7 @@ void list_destroy(t_list** list)
 		(*list)->head = temp;
 	}
 
-	(*list)->destroy((*list)->tail->data);
+	(*list)->destroy((*list)->head->data);
 	free((*list)->head);
 	(*list)->size = 0;
 	free(*list);
