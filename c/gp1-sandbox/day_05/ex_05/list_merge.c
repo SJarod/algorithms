@@ -10,20 +10,35 @@ t_list* list_merge(t_list* list1, t_list* list2)
 		return NULL;
 
 	t_list* newList = list_create();
+	list_init(newList, list1->compare, list2->destroy);	
 
 	if (list1->head == NULL)
 	{
 		if (list2->head == NULL)
 			return NULL;
 		else
-			return list2;
+		{
+			newList->head = list2->head;
+			newList->tail = list2->tail;
+			list2->head = NULL;
+			list2->tail = NULL;
+			list2->size = 0;
+			return newList;
+		}
 	}
 	else if (list2->head == NULL)
 	{
 		if (list1->head == NULL)
 			return NULL;
 		else
-			return list1;
+		{
+			newList->head = list1->head;
+			newList->tail = list1->tail;
+			list1->head = NULL;
+			list1->tail = NULL;
+			list1->size = 0;
+			return newList;
+		}
 	}
 
 	newList->head = list1->head;
