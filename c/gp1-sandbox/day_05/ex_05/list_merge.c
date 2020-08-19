@@ -111,6 +111,8 @@ t_list* list_merge(t_list* list1, t_list* list2)
 		list2->head = temp;
 	}
 
+	newList->tail = newTemp;
+
 	free(list2->head);
 
 	free(newNode);
