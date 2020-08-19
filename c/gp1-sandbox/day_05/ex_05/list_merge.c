@@ -49,20 +49,21 @@ t_list* list_merge(t_list* list1, t_list* list2)
 			break;
 		}
 
-		if (list1->head->next->next != NULL)
+		if (list1->head->next != NULL)
 		{
-			temp = list1->head->next->next;
-			free(list1->head->next);
+			temp = list1->head->next;
+			free(list1->head);
 		}
 		else
 		{
-			free(list1->head->next);
+			//free(list1->head->next);
 			free(list1->head);
 		}
 
-		list1->head->next = temp;
+		list1->head = temp;
 	}
 
+	free(list1->head);
 	list1->size = 0;
 
 	for (int i = 1; i < list2->size; ++i)
@@ -73,20 +74,21 @@ t_list* list_merge(t_list* list1, t_list* list2)
 			break;
 		}
 
-		if (list2->head->next->next != NULL)
+		if (list2->head->next != NULL)
 		{
-			temp = list2->head->next->next;
-			free(list2->head->next);
+			temp = list2->head->next;
+			free(list2->head);
 		}
 		else
 		{
-			free(list2->head->next);
+			//free(list2->head->next);
 			free(list2->head);
 		}
 
-		list2->head->next = temp;
+		list2->head = temp;
 	}
 
+	free(list2->head);
 	list2->size = 0;
 
 	return newList;
