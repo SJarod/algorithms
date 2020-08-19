@@ -20,6 +20,7 @@ t_list* list_merge(t_list* list1, t_list* list2)
 		{
 			newList->head = list2->head;
 			newList->tail = list2->tail;
+			newList->size = list2->size;
 			list2->head = NULL;
 			list2->tail = NULL;
 			list2->size = 0;
@@ -34,6 +35,7 @@ t_list* list_merge(t_list* list1, t_list* list2)
 		{
 			newList->head = list1->head;
 			newList->tail = list1->tail;
+			newList->size = list1->size;
 			list1->head = NULL;
 			list1->tail = NULL;
 			list1->size = 0;

@@ -18,13 +18,19 @@ void list_remove_next(t_list* list, t_list_node* node, void** data)
 		if (list->head->next == NULL)
 		{
 			*data = list->head->data;
+			//list->head = NULL;
+			free(list->head);
 			list->head = NULL;
+			return;
 		}
-
-		t_list_node* temp = list->head->next;
-		*data = list->head->data;
-		list->head = temp;
-		return;
+		else
+		{
+			t_list_node* temp = list->head->next;
+			*data = list->head->data;
+			free(list->head);
+			list->head = temp;
+			return;
+		}
 	}
 
 	if (node->next == NULL)
