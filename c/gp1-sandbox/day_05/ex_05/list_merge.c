@@ -11,6 +11,22 @@ t_list* list_merge(t_list* list1, t_list* list2)
 
 	t_list* newList = list_create();
 
+	if (list1->head == NULL || list1->tail == NULL)
+	{
+		if (list2->head == NULL || list2->tail == NULL)
+			return NULL;
+		else
+			return list2;
+	}
+
+	if (list2->head == NULL || list2->tail == NULL)
+	{
+		if (list1->head == NULL || list2->tail == NULL)
+			return NULL;
+		else
+			return list1;
+	}
+
 	newList->head = list1->head;
 	list1->tail->next = list2->head;
 	newList->size = list1->size + list2->size;
