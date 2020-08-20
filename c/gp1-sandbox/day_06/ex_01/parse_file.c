@@ -9,13 +9,16 @@ int read_char(FILE* file, char* pointer_c)
 	if (file == NULL || pointer_c == NULL)
 		return 0;
 
+	*pointer_c = fgetc(file);
 	if (feof(file) == 0)
-	{
-		*pointer_c = fgetc(file);
 		return 1;
-	}
 	else
+	{
+		fseek(file, -1, SEEK_CUR);
+		*pointer_c = fgetc(file);
+		fseek(file, -1, SEEK_CUR);
 		return 0;
+	}
 }
 
 int is_space(char c)
@@ -48,8 +51,19 @@ char* read_line(FILE* file)
 	if (feof(file) == 1)
 		return NULL;
 
-	char*	newStr = malloc(sizeof(char*));
-	fgets(newStr, 50, file);
+	char c;
+	int count = 0;	
+
+	while (read_char(file, &c) == 1)
+	{
+		++count;
+	}
+
+	fseek(file, -count + 1, SEEK_CUR);
+
+	char*	newStr = malloc(count * sizeof(char*));
+
+	fgets(newStr, count + 2, file);
 
 	if (newStr[string_length(newStr) - 1] == '\n')
 		newStr[string_length(newStr) - 1] = '\0';
@@ -95,7 +109,7 @@ int parse_section(const char* str, char** p_section_name)
 
 	int j = 0;
 
-	for  (int i = lbPos; i <= rbPos; ++i)
+	for  (int i = lbPos + 1; i <= rbPos - 1; ++i)
 	{
 		(*p_section_name)[j] = str[i];
 		++j;
