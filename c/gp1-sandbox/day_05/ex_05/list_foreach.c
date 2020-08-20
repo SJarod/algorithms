@@ -4,9 +4,7 @@
 
 void list_foreach(t_list const* list, void (*action)(void*))
 {
-	if (list == NULL)
-		return;
-	if (action == NULL)
+	if (list == NULL || action == NULL || list->head == NULL)
 		return;
 
 	t_list_node* temp = list->head;

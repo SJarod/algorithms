@@ -5,7 +5,7 @@
 
 void list_destroy(t_list** list)
 {
-	if (list == NULL)
+	if (list == NULL || *list == NULL)
 		return;
 
 	if ((*list)->size == 0)
@@ -30,21 +30,19 @@ void list_destroy(t_list** list)
 		if ((*list)->head->next != NULL)
 		{
 			temp = (*list)->head->next;
-			(*list)->destroy((*list)->head->data);
+
+			if ((*list)->destroy != NULL)
+				(*list)->destroy((*list)->head->data);
+
 			free((*list)->head);
-		}
-		else
-		{
-			//(*list)->destroy((*list)->head->next->data);
-			//free((*list)->head->next);
-			(*list)->destroy((*list)->head->data);
-			free((*list)->head);
+			(*list)->head = NULL;
 		}
 
 		(*list)->head = temp;
 	}
 
-	(*list)->destroy((*list)->head->data);
+	if ((*list)->destroy != NULL)
+		(*list)->destroy((*list)->head->data);
 	free((*list)->head);
 	(*list)->size = 0;
 	free(*list);
