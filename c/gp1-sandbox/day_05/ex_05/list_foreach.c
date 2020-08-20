@@ -9,7 +9,7 @@ void list_foreach(t_list const* list, void (*action)(void*))
 
 	t_list_node* temp = list->head;
 
-	while (temp->next != NULL)
+	while (temp != NULL)
 	{
 		action(temp->data);
 		temp = temp->next;
