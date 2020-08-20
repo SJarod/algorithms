@@ -16,7 +16,6 @@ int read_char(FILE* file, char* pointer_c)
 	{
 		fseek(file, -1, SEEK_CUR);
 		*pointer_c = fgetc(file);
-		fseek(file, -1, SEEK_CUR);
 		return 0;
 	}
 }
