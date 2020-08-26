@@ -8,7 +8,6 @@
 
 //game struct
 typedef struct s_game t_game;
-typedef struct s_control t_control;
 
 //struct to store info about the player
 typedef struct s_player
@@ -30,7 +29,6 @@ t_player*	create_body(t_player* player);
 void		player_renderer(SDL_Renderer* renderer, t_player* player);
 
 //player inputs handling
-t_control	player_input(SDL_Event event, t_control control);
 void		player_pos_update(t_player* player);
 
 void		destroy_player(t_player* player);

@@ -15,37 +15,31 @@ typedef struct s_game
 	SDL_Window*	window;
 	SDL_Renderer*	renderer;
 	bool		isProgramRunning;
+	bool		isGameRunning;
 	t_player*	snakeHead;
+	int		score;
 
 } t_game;
 
-//struct to store info about every tiles of the board
-typedef struct s_board
+//struct to store info about food (apple, bonus, ...)
+typedef struct s_food
 {
-	int			x;
-	int			y;
-	struct s_board*		up;	//pointer to tile above
-	struct s_board*		down;	//pointer to tile below
-	struct s_board*		right;	//pointer to right tile
-	struct s_board*		left;	//pointer to left tile
-	//pointers are NULL if tile is on edge
+	int	x;
+	int	y;
 
-} t_board;
-
-typedef struct s_control
-{
-	bool	upPressed;
-	bool	downPressed;
-	bool	rightPressed;
-	bool	leftPressed;
-
-} t_control;
+} t_food;
 
 //create the window and the game
 t_game*	create_game();
 
 //render and display
 void	game_renderer(SDL_Renderer* renderer);
+t_food*	create_food();
+void	food_renderer(SDL_Renderer* renderer, t_food* food);
+
+//collision handling
+void	is_collision(t_game* game);
+int	is_food_collision(t_game* game, t_food* food);
 
 //destroy the game and then the window
 void	destroy_game(t_game* game);

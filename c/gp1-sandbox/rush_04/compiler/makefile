@@ -1,5 +1,5 @@
 FLAGS = -W -Wall -Werror
-SDL_FLAG = -lSDL2
+SDL_FLAG = -lSDL2 -lSDL2_image
 OBJS = main.o game.o player.o
 
 main.o: ../src/main.c

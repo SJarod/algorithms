@@ -2,26 +2,24 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+#include <unistd.h>
+
 #include "../include/player.h"
 #include "../include/game.h"
 
 t_player* create_player()
 {
 	t_player* player = malloc(sizeof(t_player));
-	player->x = 368.f;
-	player->y = 268.f;
+	player->x = 352.f;
+	player->y = 224.f;
 
 	player->next = NULL;
 	player->isTail = true;
 
 	player->next = create_body(player);
-	player->next->x -= 64;
 	player->next->next = create_body(player->next);
-	player->next->next->x -= 64;
 	player->next->next->next = create_body(player->next->next);
-	player->next->next->next->x -= 64;
-player->next->next->next->next = create_body(player->next->next->next);
-player->next->next->next->next->x -= 64;
+	player->next->next->next->next = create_body(player->next->next->next);
 
 	return player;
 }
@@ -70,51 +68,11 @@ void player_renderer(SDL_Renderer* renderer, t_player* player)
 	SDL_RenderPresent(renderer);
 }
 
-t_control player_input(SDL_Event event, t_control control)
-{
-	if (event.type == SDL_KEYDOWN)
-	{
-		if (event.key.keysym.scancode == SDL_SCANCODE_RIGHT)
-		{
-			control.rightPressed = true;
-		}
-		if (event.key.keysym.scancode == SDL_SCANCODE_LEFT)
-		{
-			control.leftPressed = true;
-		}
-		if (event.key.keysym.scancode == SDL_SCANCODE_UP)
-		{
-			control.upPressed = true;
-		}
-		if (event.key.keysym.scancode == SDL_SCANCODE_DOWN)
-		{
-			control.downPressed = true;
-		}
-	}
-	else if (event.type == SDL_KEYUP)
-	{
-		if (event.key.keysym.scancode == SDL_SCANCODE_RIGHT)
-		{
-			control.rightPressed = false;
-		}
-		if (event.key.keysym.scancode == SDL_SCANCODE_LEFT)
-		{
-			control.leftPressed = false;
-		}
-		if (event.key.keysym.scancode == SDL_SCANCODE_UP)
-		{
-			control.upPressed = false;
-		}
-		if (event.key.keysym.scancode == SDL_SCANCODE_DOWN)
-		{
-			control.downPressed = false;
-		}
-	}
-}
-
 void player_pos_update(t_player* player)
 {
 	int count = 0;
+	float tempx = 0;
+	float tempy = 0;
 	t_player* temp = player;
 
 	while (temp->isTail == false)
@@ -123,12 +81,11 @@ void player_pos_update(t_player* player)
 		++count;
 	}
 
-	//SDL_Delay(450);
+	SDL_Delay(100);
 
 	for (int i = count; i > 0; --i)
 	{
 		temp = player;
-		//SDL_Delay(200);
 
 		for (int j = i - 1; j > 0; --j)
 		{
@@ -146,18 +103,26 @@ void destroy_player(t_player* player)
 		return;
 
 	t_player* temp;
+	temp = player;
+	int count = 0;
 
-	for (int i = 0; i < 3; ++i)
+	while (temp->isTail == false)
+	{
+		temp = temp->next;
+		++count;
+	}
+
+	for (int i = 0; i < count; ++i)
 	{
 		temp = player;
 
-		while (temp->next != NULL)
+		while (temp->next->isTail == false)
 		{
 			temp = temp->next;
 		}
 
-		fprintf(stderr, "node free");
-		free(temp);
-		temp = NULL;
+		free(temp->next);
+		temp->isTail = true;
+		temp->next = NULL;
 	}
 }
