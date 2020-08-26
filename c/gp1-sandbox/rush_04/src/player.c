@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#include <unistd.h>
-
 #include "../include/player.h"
 #include "../include/game.h"
 
@@ -15,11 +13,12 @@ t_player* create_player()
 
 	player->next = NULL;
 	player->isTail = true;
+	player->speed = 100;
 
 	player->next = create_body(player);
 	player->next->next = create_body(player->next);
 	player->next->next->next = create_body(player->next->next);
-	player->next->next->next->next = create_body(player->next->next->next);
+	//player->next->next->next->next = create_body(player->next->next->next);
 
 	return player;
 }
@@ -64,8 +63,6 @@ void player_renderer(SDL_Renderer* renderer, t_player* player)
 	SDL_Rect rect = {temp->x, temp->y, 32, 32};
 
 	SDL_RenderFillRect(renderer, &rect);
-
-	SDL_RenderPresent(renderer);
 }
 
 void player_pos_update(t_player* player)
@@ -81,7 +78,7 @@ void player_pos_update(t_player* player)
 		++count;
 	}
 
-	SDL_Delay(100);
+	SDL_Delay(player->speed);
 
 	for (int i = count; i > 0; --i)
 	{

@@ -16,10 +16,11 @@ typedef struct s_player
 	float			y;
 	struct s_player*	next;
 	bool			isTail;
+	int			speed;
 
 } t_player;
 
-//create the player (only called once: creating head, 2 bodies and 1 tail)
+//create the player (only called once: creating head, 1 body and 1 tail)
 t_player*	create_player();
 
 //create a new body when snake eats an apple
