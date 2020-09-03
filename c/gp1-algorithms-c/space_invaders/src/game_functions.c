@@ -65,7 +65,7 @@ void move_enemies(game_t* game, float deltaTime)
 		{
 			game->enemyDirection = -game->enemyDirection;
 
-			for (int j = 0; j < MAX_ENEMIES; ++j)
+			for (int j = 0; j < game->enemyCount; ++j)
 			{
 				game->enemies[j].y += 1;
 			}
