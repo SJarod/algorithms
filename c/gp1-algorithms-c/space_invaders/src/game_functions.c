@@ -79,10 +79,13 @@ void move_enemies(game_t* game, float deltaTime)
 // A new bullet is added to the list of bullets
 void random_enemy_fire(game_t* game)
 {
+	if (game->enemyCount == 0)
+		return;
+
 	int i = rand() % game->enemyCount;
 	++game->enemyBulletCount;
-	game->enemyBullets[game->enemyBulletCount - 1].x = game->enemies[i].x;
-	game->enemyBullets[game->enemyBulletCount - 1].y = game->enemies[i].y;
+	game->enemyBullets[game->enemyBulletCount].x = game->enemies[i].x;
+	game->enemyBullets[game->enemyBulletCount].y = game->enemies[i].y;
 }
 
 // Move the single player bullet
@@ -105,19 +108,32 @@ void remove_enemy(game_t* game, int enemyIndex)
 // Remove enemy bullet from enemyBullets
 void remove_enemy_bullet(game_t* game, int enemyBulletIndex)
 {
-
+	game->enemyBullets[enemyBulletIndex] = game->enemyBullets[game->enemyBulletCount];
+	--game->enemyBulletCount;
 }
 
 // Move every enemy bullets
 // Remove the bullet if out of range
 void move_enemies_bullets(game_t* game, float deltaTime)
 {
-	game->enemyBullets[game->enemyBulletCount].y += 100 * deltaTime;
+	for (int i = 0; i < game->enemyBulletCount; ++i)
+	{
+		game->enemyBullets[i].y += 100 * deltaTime;
+
+		if (game->enemyBullets[i].y >= game->height)
+			remove_enemy_bullet(game, i);
+	}
 }
 
 // Check if the player is hit by a bullet using bullet position and PLAYER_WIDTH/PLAYER_HEIGHT
 bool player_is_hit_by_bullet(player_t* player, bullet_t* bullet)
 {
+	if (bullet->x >= player->x - PLAYER_WIDTH / 2 && bullet->x <= player->x + PLAYER_WIDTH / 2 &&
+	    bullet->y <= player->y + PLAYER_HEIGHT / 2 && bullet->y >= player->y - PLAYER_HEIGHT / 2)
+	{
+		return true;
+	}
+
     return false;
 }
 
