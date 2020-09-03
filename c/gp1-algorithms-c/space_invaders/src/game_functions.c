@@ -1,5 +1,7 @@
 
 #include <stdlib.h>
+#include <time.h>
+
 #include "game.h"
 
 float get_enemy_speed(int remaining)
@@ -79,6 +81,8 @@ void move_enemies(game_t* game, float deltaTime)
 // A new bullet is added to the list of bullets
 void random_enemy_fire(game_t* game)
 {
+	srand(time(NULL));
+
 	if (game->enemyCount == 0)
 		return;
 
