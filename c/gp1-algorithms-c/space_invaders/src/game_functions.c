@@ -94,7 +94,9 @@ void move_player_bullet(game_t* game, float deltaTime)
 {
 	game->playerBullet.y -= 100 * deltaTime;
 
-	if (game->playerBullet.y > 0)
+	if (game->playerBullet.y < 0)
+		game->playerBulletAlive = false;
+	if (game->playerBulletAlive == true)
 		game->player.canShoot = false;
 }
 
@@ -103,6 +105,7 @@ void remove_enemy(game_t* game, int enemyIndex)
 {
 	--game->enemyCount;
 	game->enemies[enemyIndex] = game->enemies[game->enemyCount];
+	game->playerBulletAlive = false;
 }
 
 // Remove enemy bullet from enemyBullets
