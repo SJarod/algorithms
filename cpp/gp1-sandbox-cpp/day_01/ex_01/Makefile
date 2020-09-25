@@ -1,11 +1,14 @@
-BIN=exe
+BIN=prgm
 CXXFLAGS=-O0 -W -Wall -g
 
 OBJS=main.o
 DEPS=$(OBJS:.o=.d)
 
 $(BIN): $(OBJS)
-	  $(CXX) $(CXXFLAGS) $^ -o $@
+	$(CXX) $(CXXFLAGS) $^ -o $@
 
+run: $(BIN)
+	./$(BIN)
+	
 clean:
 	rm -rf $(OBJS) $(BIN)
