@@ -7,26 +7,37 @@ using namespace day_03;
 
 int main(int, char*[])
 {
-    vector2D v1;
+    vector2D v1 = vector2D::zero;
     std::cout << "v1 : " << v1 << std::endl;
 
-    const vector2D v2(1.0f, 2.5f);
-    std::cout << "v2.X() : " << v2.X() << ", v2.Y() : " << v2.Y() << std::endl;
+    v1 = vector2D::up;
+    std::cout << "v1 : " << v1 << std::endl;
 
-    vector2D v3 = v2;
-    std::cout << "v3 : " << v3 << std::endl;
+    v1 = vector2D::down;
+    std::cout << "v1 : " << v1 << std::endl;
 
-    v3.X() = v3.Y() = 1.2f;
-    std::cout << "v3 : " << v3 << std::endl;
+    v1 = vector2D::left;
+    std::cout << "v1 : " << v1 << std::endl;
 
-    vector2D v4(0.2f, 10.0f);
-    std::cout << "v4 : " << v4 << std::endl;
+    v1 = vector2D::right;
+    std::cout << "v1 : " << v1 << std::endl;
 
-    v4 = v3;
-    std::cout << "v4 : " << v4 << std::endl;
+    float f = v1[1] = 20.0f;
+    f = v1[0] = 2.0f * f;
 
-    vector2D v5 = 3.0f;
-    std::cout << "v5 : " << v5 << std::endl;
+    std::cout << "v1 : " << v1 << ", f: " << f << std::endl;
 
+    float x = v1['x'] = 78.0f;
+    float y = v1['y'] = 67.0f;
+
+    std::cout << "x : " << x << ", y: " << y << std::endl;
+    std::cout << "v1 : " << v1 << std::endl;
+
+    x = v1["x"] = 12.0f;
+    y = v1["y"] = 34.0f;
+
+    std::cout << "x : " << x << ", y: " << y << std::endl;
+    std::cout << "v1 : " << v1 << std::endl;
+    
     return EXIT_SUCCESS;
 }

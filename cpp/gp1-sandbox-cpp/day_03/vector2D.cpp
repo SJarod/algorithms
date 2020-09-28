@@ -2,6 +2,12 @@
 
 #include <iostream>
 
+const day_03::vector2D day_03::vector2D::zero   (0.f, 0.f);
+const day_03::vector2D day_03::vector2D::up     (0.f, 1.f);
+const day_03::vector2D day_03::vector2D::down   (0.f, -1.f);
+const day_03::vector2D day_03::vector2D::left   (-1.f, 0.f);
+const day_03::vector2D day_03::vector2D::right  (1.f, 0.f);
+
 day_03::vector2D::vector2D()
 {
     x = 0.f;
@@ -51,6 +57,30 @@ day_03::vector2D& day_03::vector2D::operator=(const vector2D& copy)
     y = copy.y;
 
     return *this;
+}
+
+float& day_03::vector2D::operator[](int num)
+{
+    if (num == 0 || num == 'x')
+    {
+        return x;
+    }
+    else
+    {
+        return y;
+    }
+}
+
+float& day_03::vector2D::operator[](std::string str)
+{
+    if (str == "x")
+    {
+        return x;
+    }
+    else
+    {
+        return y;
+    }
 }
 
 std::ostream& day_03::operator<<(std::ostream& stream, const day_03::vector2D& copy)

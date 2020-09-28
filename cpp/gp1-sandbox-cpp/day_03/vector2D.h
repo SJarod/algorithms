@@ -15,12 +15,20 @@ namespace day_03
             vector2D(float a);
             vector2D(float a, float b);
 
+            static const vector2D zero;
+            static const vector2D up;
+            static const vector2D down;
+            static const vector2D left;
+            static const vector2D right;
+
             float& X();
             float& Y();
             float X() const;
             float Y() const;
 
             vector2D&   operator=(const vector2D& copy);
+            float&      operator[](int num);
+            float&      operator[](std::string str);
 
             ~vector2D();
     };
