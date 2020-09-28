@@ -33,5 +33,6 @@ namespace day_03
             ~vector2D();
     };
 
-    std::ostream& operator<<(std::ostream& stream, const vector2D& copy);
+    std::ostream&   operator<<(std::ostream& stream, const vector2D& copy);
+    vector2D&       operator>>(std::istream& stream, vector2D& newVect);
 }
