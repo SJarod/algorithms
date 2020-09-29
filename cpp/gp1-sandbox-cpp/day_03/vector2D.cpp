@@ -92,10 +92,10 @@ std::ostream& day_03::operator<<(std::ostream& stream, const day_03::vector2D& c
 
 day_03::vector2D& day_03::operator>>(std::istream& stream, day_03::vector2D& newVect)
 {
-    float value;
+    std::string value;
     stream >> value;
 
-    newVect[0] = value;
+    newVect[0] = std::stof(value);
     
     std::string coma;
     stream >> coma;
@@ -106,7 +106,7 @@ day_03::vector2D& day_03::operator>>(std::istream& stream, day_03::vector2D& new
     }
 
     stream >> value;
-    newVect[1] = value;
+    newVect[1] = std::stof(value);
 
     return newVect;
 }
