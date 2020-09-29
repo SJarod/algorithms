@@ -10,5 +10,7 @@ $(BIN): $(OBJS)
 run: $(BIN)
 	./$(BIN)
 
+r: clean run
+
 clean:
 	rm -rf $(OBJS) $(DEPS) $(BIN)
