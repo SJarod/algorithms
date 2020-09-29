@@ -53,19 +53,70 @@ float day_03::vector2D::Y() const
     return y;
 }
 
-float day_03::vector2D::dot_product(day_03::vector2D vect) const
+day_03::vector2D day_03::vector2D::add(const vector2D& vect) const
+{
+    return vector2D(x + vect.X(), y + vect.Y());
+}
+
+day_03::vector2D day_03::vector2D::scale(const float scale) const
+{
+    return vector2D(x * scale, y * scale);
+}
+
+day_03::vector2D day_03::vector2D::normalize() const
+{
+    float magnitude = length();
+    if (magnitude == 0)
+    {
+        return zero;
+    }
+
+    return scale(1 / magnitude);
+}
+
+day_03::vector2D& day_03::vector2D::add(const day_03::vector2D& vect)
+{
+    x += vect.x;
+    y += vect.y;
+
+    return *this;
+}
+
+day_03::vector2D& day_03::vector2D::scale(const float scale)
+{
+    x *= scale;
+    y *= scale;
+
+    return *this;
+}
+
+day_03::vector2D& day_03::vector2D::normalize()
+{
+    float magnitude = length();
+    if (magnitude == 0)
+    {
+        return *this;
+    }
+
+    x /= magnitude;
+    y /= magnitude;
+
+    return *this;
+}
+
+float day_03::vector2D::dot_product(const day_03::vector2D& vect) const
 {
     return this->X() * vect.X() + this->Y() * vect.Y();
 }
 
-float day_03::vector2D::cross_product(day_03::vector2D vect) const
+float day_03::vector2D::cross_product(const day_03::vector2D& vect) const
 {
     return this->X() * vect.Y() - this->Y() * vect.X();
 }
 
 float day_03::vector2D::length() const
 {
-    return sqrt(pow(this->x, 2) + pow(this->y, 2));
+    return sqrtf(powf(this->x, 2) + powf(this->y, 2));
 }
 
 day_03::vector2D& day_03::vector2D::operator=(const vector2D& copy)
@@ -98,6 +149,36 @@ float& day_03::vector2D::operator[](std::string str)
     {
         return y;
     }
+}
+
+bool day_03::vector2D::operator==(const vector2D& copy) const
+{
+    return this->X() == copy.X() && this->Y() == copy.Y();
+}
+
+bool day_03::vector2D::operator!=(const vector2D& copy) const
+{
+    return this->X() != copy.X() || this->Y() != copy.Y();
+}
+
+bool day_03::vector2D::operator<(const vector2D& copy) const
+{
+    return length() < copy.length();
+}
+
+bool day_03::vector2D::operator<=(const vector2D& copy) const
+{
+    return this->length() <= copy.length();
+}
+
+bool day_03::vector2D::operator>(const vector2D& copy) const
+{
+    return this->length() > copy.length();
+}
+
+bool day_03::vector2D::operator>=(const vector2D& copy) const
+{
+    return this->length() >= copy.length();
 }
 
 std::string& day_03::operator+(std::string& baseStr, const vector2D& copy)

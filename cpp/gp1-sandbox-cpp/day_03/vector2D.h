@@ -26,13 +26,27 @@ namespace day_03
             float   X() const;
             float   Y() const;
 
-            float   dot_product(vector2D vect) const;
-            float   cross_product(vector2D vect) const;
+            vector2D    add(const vector2D& vect) const;
+            vector2D    scale(const float scale) const;
+            vector2D    normalize() const;
+            vector2D&   add(const vector2D& vect);
+            vector2D&   scale(const float scale);
+            vector2D&   normalize();
+
+            float   dot_product(const vector2D& vect) const;
+            float   cross_product(const vector2D& vect) const;
             float   length() const;
 
             vector2D&       operator=(const vector2D& copy);
             float&          operator[](int num);
             float&          operator[](std::string str);
+
+            bool            operator==(const vector2D& copy) const;
+            bool            operator!=(const vector2D& copy) const;
+            bool            operator<(const vector2D& copy) const;
+            bool            operator<=(const vector2D& copy) const;
+            bool            operator>(const vector2D& copy) const;
+            bool            operator>=(const vector2D& copy) const;
 
             ~vector2D();
     };
