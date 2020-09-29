@@ -58,6 +58,11 @@ day_03::vector2D day_03::vector2D::add(const vector2D& vect) const
     return vector2D(x + vect.X(), y + vect.Y());
 }
 
+day_03::vector2D day_03::vector2D::sub(const vector2D& vect) const
+{
+    return vector2D(x - vect.X(), y - vect.Y());
+}
+
 day_03::vector2D day_03::vector2D::scale(const float scale) const
 {
     return vector2D(x * scale, y * scale);
@@ -78,6 +83,14 @@ day_03::vector2D& day_03::vector2D::add(const day_03::vector2D& vect)
 {
     x += vect.x;
     y += vect.y;
+
+    return *this;
+}
+
+day_03::vector2D& day_03::vector2D::sub(const day_03::vector2D& vect)
+{
+    x -= vect.x;
+    y -= vect.y;
 
     return *this;
 }
@@ -116,7 +129,7 @@ float day_03::vector2D::cross_product(const day_03::vector2D& vect) const
 
 float day_03::vector2D::length() const
 {
-    return sqrtf(powf(this->x, 2) + powf(this->y, 2));
+    return sqrtf(x * x + y * y);
 }
 
 day_03::vector2D& day_03::vector2D::operator=(const vector2D& copy)
@@ -149,6 +162,90 @@ float& day_03::vector2D::operator[](std::string str)
     {
         return y;
     }
+}
+
+day_03::vector2D day_03::vector2D::operator+(const vector2D& copy) const
+{
+    return add(copy);
+}
+
+day_03::vector2D& day_03::vector2D::operator+=(const vector2D& copy)
+{
+    return add(copy);
+}
+
+day_03::vector2D day_03::vector2D::operator-(const vector2D& copy) const
+{
+    return sub(copy);
+}
+
+day_03::vector2D day_03::vector2D::operator-() const
+{
+    return vector2D(-x, -y);
+}
+
+day_03::vector2D& day_03::vector2D::operator-=(const vector2D& copy)
+{
+    return sub(copy);
+}
+
+day_03::vector2D day_03::vector2D::operator*(const float scale) const
+{
+    return vector2D::scale(scale);
+}
+
+day_03::vector2D day_03::operator*(const float scale, const vector2D copy)
+{
+    return vector2D(copy.X() * scale, copy.Y() * scale);
+}
+
+day_03::vector2D& day_03::vector2D::operator*=(const float scale)
+{
+    this->X() *= scale;
+    this->Y() *= scale;
+
+    return *this;
+}
+
+day_03::vector2D day_03::vector2D::operator/(const float scale) const
+{
+    return vector2D::scale(1 / scale);
+}
+
+day_03::vector2D day_03::operator/(const float scale, const vector2D copy)
+{
+    return vector2D(scale / copy.X(), scale / copy.Y());
+}
+
+day_03::vector2D& day_03::vector2D::operator/=(const float scale)
+{
+    this->X() /= scale;
+    this->Y() /= scale;
+
+    return *this;
+}
+
+day_03::vector2D& day_03::vector2D::operator++(int)
+{
+    float mag = length();
+    X() *= (mag + 1) / mag;
+    Y() *= (mag + 1) / mag;
+
+    return *this;
+}
+
+day_03::vector2D& day_03::vector2D::operator--(int)
+{
+    float mag = length();
+    X() *= (mag - 1) / mag;
+    Y() *= (mag - 1) / mag;
+
+    return *this;
+}
+
+float day_03::vector2D::operator,(const vector2D& copy) const
+{
+    return dot_product(copy);
 }
 
 bool day_03::vector2D::operator==(const vector2D& copy) const

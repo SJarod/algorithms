@@ -27,9 +27,11 @@ namespace day_03
             float   Y() const;
 
             vector2D    add(const vector2D& vect) const;
+            vector2D    sub(const vector2D& vect) const;
             vector2D    scale(const float scale) const;
             vector2D    normalize() const;
             vector2D&   add(const vector2D& vect);
+            vector2D&   sub(const vector2D& vect);
             vector2D&   scale(const float scale);
             vector2D&   normalize();
 
@@ -40,6 +42,19 @@ namespace day_03
             vector2D&       operator=(const vector2D& copy);
             float&          operator[](int num);
             float&          operator[](std::string str);
+
+            vector2D        operator+(const vector2D& copy) const;
+            vector2D&       operator+=(const vector2D& copy);
+            vector2D        operator-(const vector2D& copy) const;
+            vector2D        operator-() const;
+            vector2D&       operator-=(const vector2D& copy);
+            vector2D        operator*(const float scale) const;
+            vector2D&       operator*=(const float scale);
+            vector2D        operator/(const float scale) const;
+            vector2D&       operator/=(const float scale);
+            vector2D&       operator++(int);    //operator++() == ++variable ; operator++(int) == variable++
+            vector2D&       operator--(int);    //operator--() == --variable ; operator--(int) == variable--
+            float           operator,(const vector2D& copy) const;
 
             bool            operator==(const vector2D& copy) const;
             bool            operator!=(const vector2D& copy) const;
@@ -55,4 +70,6 @@ namespace day_03
     vector2D&       operator>>(std::istream& stream, vector2D& newVect);
     std::string&    operator+(std::string& baseStr, const vector2D& copy);
     std::string&    operator+=(std::string& baseStr, const vector2D& copy);
+    vector2D        operator*(const float scale, const vector2D copy);
+    vector2D        operator/(const float scale, const vector2D copy);
 }
