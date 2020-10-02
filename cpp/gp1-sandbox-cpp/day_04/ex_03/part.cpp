@@ -1,4 +1,6 @@
 #include "part.h"
+#include "engine.h"
+#include "wheel.h"
 
 #include <iostream>
 
@@ -15,6 +17,12 @@ part::part(const engine& e)
     weight = e.get_weight();
     consomation = e.get_consomation();
     power = e.get_power();
+}
+
+part::part(const wheel& w)
+{
+    name = w.get_name();
+    weight = w.get_weight();
 }
 
 part::~part()

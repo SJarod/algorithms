@@ -12,22 +12,6 @@ engine::engine()
 
 }
 
-engine::engine(const diesel& en)
-{
-    name = en.get_name();
-    weight = en.get_weight();
-    consomation = en.get_consomation();
-    power = en.get_power();
-}
-
-engine::engine(const fuel& en)
-{
-    name = en.get_name();
-    weight = en.get_weight();
-    consomation = en.get_consomation();
-    power = en.get_power();
-}
-
 engine::~engine()
 {
     std::cout << "Destroying part " << name << std::endl;
@@ -52,26 +36,6 @@ int engine::get_power() const
 {
     return power;
 }
-
-// engine& engine::operator=(const diesel& en)
-// {
-//     name = en.get_name();
-//     weight = en.get_weight();
-//     consomation = en.get_consomation();
-//     power = en.get_power();
-
-//     return *this;
-// }
-
-// engine& engine::operator=(const fuel& en)
-// {
-//     name = en.get_name();
-//     weight = en.get_weight();
-//     consomation = en.get_consomation();
-//     power = en.get_power();
-
-//     return *this;
-// }
 
 engine::operator std::string() const
 {

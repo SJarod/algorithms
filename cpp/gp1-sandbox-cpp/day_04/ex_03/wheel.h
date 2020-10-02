@@ -6,9 +6,9 @@
 
 namespace day_04
 {
-    class wheel : public part
+    class wheel
     {
-        private:
+        protected:
             std::string name;
             float       weight;
             float       size;
@@ -16,6 +16,9 @@ namespace day_04
         public:
             wheel();
             ~wheel();
+
+            std::string get_name() const;
+            float       get_weight() const;
 
             operator std::string() const;
     };

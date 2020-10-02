@@ -12,25 +12,20 @@ namespace day_04
 
     class engine
     {
-        private:
+        protected:
             std::string name;
-            float       weight;
-            int         consomation;
-            int         power;
+            float       weight = 0;
+            int         consomation = 0;
+            int         power = 0;
 
         public:
             engine();
-            engine(const diesel& en);
-            engine(const fuel& en);
             ~engine();
 
             std::string get_name() const;
             float       get_weight() const;
             int         get_consomation() const;
             int         get_power() const;
-
-            // engine&     operator=(const diesel& en);
-            // engine&     operator=(const fuel& en);
 
             operator std::string() const;
     };

@@ -1,24 +1,25 @@
 #pragma once
 
-#include "engine.h"
-
 #include <iostream>
 
 namespace day_04
 {
     class engine;
+    class wheel;
 
     class part
     {
         private:
             std::string name;
-            float       weight;
-            int         consomation;
-            int         power;
+            float       weight = 0;
+            int         consomation = 0;
+            int         power = 0;
+            float       size = 0;
 
         public:
             part();
             part(const engine& e);
+            part(const wheel& w);
             ~part();
 
             std::string get_name() const;
