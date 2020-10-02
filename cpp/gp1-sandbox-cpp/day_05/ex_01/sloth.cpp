@@ -5,14 +5,10 @@
 sloth::sloth()
 {
     name = "sloth";
+    std::cout << name << " created" << std::endl;
 }
 
 sloth::~sloth()
 {
-
+    std::cout << name << " destroyed" << std::endl;
 }
-
-// void sloth::print() const
-// {
-//     std::cout << "and I am also a " << name << std::endl;
-// }

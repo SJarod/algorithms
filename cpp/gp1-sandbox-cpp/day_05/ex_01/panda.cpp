@@ -5,14 +5,10 @@
 panda::panda()
 {
     name = "panda";
+    std::cout << name << " created" << std::endl;
 }
 
 panda::~panda()
 {
-
+    std::cout << name << " destroyed" << std::endl;
 }
-
-// void panda::print() const
-// {
-//     std::cout << "and I am also a " << name << std::endl;
-// }

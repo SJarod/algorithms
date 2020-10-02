@@ -14,5 +14,5 @@ class animal
         animal(const sloda* s);
         ~animal();
 
-        void    print() const;
+        virtual void    print() const;
 };

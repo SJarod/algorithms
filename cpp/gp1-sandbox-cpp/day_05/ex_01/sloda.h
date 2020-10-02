@@ -8,4 +8,8 @@ class sloda : public sloth, public panda
     private:
 
     public:
+        sloda();
+        ~sloda();
+
+        void    print() const override;
 };
