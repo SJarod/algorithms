@@ -3,13 +3,13 @@
 #include "sloth.h"
 #include "panda.h"
 
-class sloda : public sloth, public panda
+class sloda : public panda, public sloth
 {
     private:
 
     public:
         sloda();
-        ~sloda();
+        ~sloda() override;
 
         void    print() const override;
 };

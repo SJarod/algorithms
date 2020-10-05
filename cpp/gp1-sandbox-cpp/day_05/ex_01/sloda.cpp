@@ -8,11 +8,11 @@ sloda::sloda()
 
 sloda::~sloda()
 {
-    std::cout << name << " destroyed" << std::endl;
+    std::cout << "sloda destroyed" << std::endl;
 }
 
 void sloda::print() const
 {
-    animal::print();
+    sloth::print();
     std::cout << "who is mixed with a panda" << std::endl;
 }

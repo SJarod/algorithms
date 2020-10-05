@@ -8,5 +8,7 @@ class panda : virtual public animal
 
     public:
         panda();
-        ~panda();
+        ~panda() override;
+
+        void print() const override;
 };

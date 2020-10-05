@@ -10,5 +10,11 @@ sloth::sloth()
 
 sloth::~sloth()
 {
-    std::cout << name << " destroyed" << std::endl;
+    std::cout << "sloth destroyed" << std::endl;
+}
+
+void sloth::print() const
+{
+    animal::print();
+    std::cout << "and I am also a sloth" << std::endl;
 }

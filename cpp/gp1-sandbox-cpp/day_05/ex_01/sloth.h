@@ -8,5 +8,7 @@ class sloth : virtual public animal
 
     public:
         sloth();
-        ~sloth();
+        ~sloth() override;
+
+        void print() const override;
 };

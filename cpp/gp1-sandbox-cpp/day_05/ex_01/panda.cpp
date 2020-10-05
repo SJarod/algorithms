@@ -10,5 +10,11 @@ panda::panda()
 
 panda::~panda()
 {
-    std::cout << name << " destroyed" << std::endl;
+    std::cout << "panda destroyed" << std::endl;
+}
+
+void panda::print() const
+{
+    animal::print();
+    std::cout << "and I am also a panda" << std::endl;
 }

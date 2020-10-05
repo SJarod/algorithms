@@ -11,8 +11,7 @@ class animal
 
     public:
         animal();
-        animal(const sloda* s);
-        ~animal();
+        virtual ~animal();
 
         virtual void    print() const;
 };
