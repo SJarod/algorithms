@@ -1,0 +1,3 @@
+INTRO_TEXT|Welcome
+MISSION_COMPLETE|Mission complete
+CONGRATULATIONS|Congratulations
