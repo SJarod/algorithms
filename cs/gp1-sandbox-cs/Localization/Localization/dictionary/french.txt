@@ -1,3 +1,6 @@
 INTRO_TEXT|Bienvenu
-MISSION_COMPLETE|Mission terminée
-CONGRATULATIONS|Félicitation
+MISSION_COMPLETE|Missions terminÃ©e
+CONGRATULATIONS|FÃ©licitation
+GREETINGS|Salut
+FRIEND|Comment Ã§a va?
+QUESTION|Tu vas bien?

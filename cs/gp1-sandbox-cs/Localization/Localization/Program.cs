@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+using System.Linq;
+
 namespace Localization
 {
     class LanguageConfig
@@ -11,7 +13,7 @@ namespace Localization
         List<string> language = new List<string>();
         List<string> keyword = new List<string>();
 
-        void getLanguages(StreamReader file)
+        void initLanguages(StreamReader file)
         {
             string str = file.ReadLine();
             string[] splitStr = str.Split('|');
@@ -22,7 +24,7 @@ namespace Localization
             }
         }
 
-        void getKeyWords(StreamReader file)
+        void initKeyWords(StreamReader file)
         {
             string str = file.ReadLine();
             string[] splitStr = str.Split('|');
@@ -31,6 +33,22 @@ namespace Localization
             {
                 keyword.Add(splitStr[i]);
             }
+        }
+
+        public List<string> getLanguages()
+        {
+            return language;
+        }
+
+        public List<string> getKeyWords()
+        {
+            return keyword;
+        }
+
+        public void addLocalisation(string key)
+        {
+            if (!keyword.Contains(key))
+                keyword.Add(key);
         }
 
         public void initDictionary()
@@ -45,8 +63,8 @@ namespace Localization
 
             StreamReader file = new StreamReader(path);
 
-            getLanguages(file);
-            getKeyWords(file);
+            initLanguages(file);
+            initKeyWords(file);
 
             file.Close();
             file.Dispose();
@@ -59,6 +77,7 @@ namespace Localization
 
         Dictionary<string, string> word = new Dictionary<string, string>();
 
+        //loading a language that exists
         public Language(string l)
         {
             language = l;
@@ -73,15 +92,23 @@ namespace Localization
 
             StreamReader file = new StreamReader(path);
 
-            getWords(file);
+            int lineCount = 0;
+            while (file.ReadLine() != null)
+            {
+                ++lineCount;
+            }
+            file.DiscardBufferedData();
+            file.BaseStream.Position = 0;
+
+            addWords(file, lineCount);
 
             file.Close();
             file.Dispose();
         }
 
-        void getWords(StreamReader file)
+        void addWords(StreamReader file, int lineCount)
         {
-            for (int i = 0; i < 3; ++i)
+            for (int i = 0; i < lineCount; ++i)
             {
                 string str = file.ReadLine();
                 string[] splitStr = str.Split('|');
@@ -90,9 +117,29 @@ namespace Localization
             }
         }
 
+        public void addLocalisation(string key, string value)
+        {
+            word.Add(key, value);
+        }
+
+        public void removeLocalisation(string key)
+        {
+            word.Remove(key);
+        }
+
+        public int getKeyWordsCount()
+        {
+            return word.Count;
+        }
+
         public string getName()
         {
             return language;
+        }
+
+        public string getKeyWords(int i)
+        {
+            return word.ElementAt(i).Key;
         }
 
         public string getContent(string key)
@@ -113,12 +160,17 @@ namespace Localization
             LanguageConfig config = new LanguageConfig();
             config.initDictionary();
 
-            Language english = new Language("english");
+            Dictionary<int, Language> dictionary = new Dictionary<int, Language>();
+
+            Language english = new Language("English");
+            dictionary.Add(0, english);
+
+            Language current = english;
 
             while (!windowShouldClose)
             {
                 Console.WriteLine("Make a choice");
-                Console.WriteLine("Current dictionary : " + english.getName());
+                Console.WriteLine("Current dictionary : " + current.getName());
                 Console.WriteLine("");
                 Console.WriteLine("1) Select a dictionary");
                 Console.WriteLine("2) Create a dictionary");
@@ -135,36 +187,236 @@ namespace Localization
                     case "1":
                         {
                             Console.Clear();
+                            Console.WriteLine("Select a dictionary");
+                            Console.WriteLine("");
+
+                            for (int i = 0; i < dictionary.Count; ++i)
+                            {
+                                Console.WriteLine((i + 1).ToString() + ") " + dictionary[i].getName());
+                            }
+
+                            string t = Console.ReadLine();
+                            bool found = true;
+
+                            for (int i = 0; i < t.Length; ++i)
+                            {
+                                char[] charArray = t.ToCharArray();
+                                if (charArray[i] < '0' || charArray[i] > '9')
+                                {
+                                    found = false;
+                                    break;
+                                }
+                            }
+
+                            if (found)
+                            {
+                                int num = int.Parse(t);
+
+                                if (num >= 1 && num <= dictionary.Count)
+                                    current = dictionary[num - 1];
+                                else
+                                    Console.WriteLine("Enter a correct number");
+                            }
+                            else
+                                Console.WriteLine("Enter a correct number");
+
+                            Console.WriteLine("");
                             break;
                         }
                     case "2":
                         {
                             Console.Clear();
+                            Console.WriteLine("Create new dictionary");
+                            Console.WriteLine("");
+                            Console.WriteLine("enter name :");
+
+                            string name = Console.ReadLine();
+                            List<string> temp = config.getLanguages();
+                            bool found = false;
+
+                            for (int i = 0; i < temp.Count; ++i)
+                            {
+                                if (name == temp[i])
+                                {
+                                    Language newLanguage = new Language(name);
+                                    dictionary.Add(dictionary.Count, newLanguage);
+                                    found = true;
+                                    break;
+                                }
+                            }
+
+                            if (!found)
+                            {
+                                Console.WriteLine("No dictionary " + name + " found");
+                                Console.WriteLine("");
+                            }
+                            else
+                            {
+                                Console.WriteLine(name + " created");
+                                Console.WriteLine("");
+                            }
+
                             break;
                         }
                     case "3":
                         {
                             Console.Clear();
+                            List<string> temp = config.getKeyWords();
+                            Console.WriteLine(current.getName());
+                            Console.WriteLine("");
+
+                            for (int i = 0; i < temp.Count; ++i)
+                            {
+                                Console.WriteLine(temp[i] + "|" + current.getContent(temp[i]));
+                            }
+
+                            Console.WriteLine("");
                             break;
                         }
                     case "4":
                         {
                             Console.Clear();
+                            Console.WriteLine("Get a localisation");
+                            Console.WriteLine("");
+                            Console.WriteLine("enter key :");
+
+                            string t = Console.ReadLine();
+                            List<string> key = config.getKeyWords();
+                            bool found = false;
+
+                            for (int i = 0; i < key.Count; ++i)
+                            {
+                                if (t == key[i])
+                                {
+                                    Console.WriteLine("found value : " + current.getContent(t));
+                                    found = true;
+                                    break;
+                                }
+                            }
+
+                            if (!found)
+                                Console.WriteLine("value not found");
+
+                            Console.WriteLine("");
                             break;
                         }
                     case "5":
                         {
                             Console.Clear();
+                            Console.WriteLine("Add a localisation");
+                            Console.WriteLine("");
+                            Console.WriteLine("enter key :");
+
+                            string newKey = Console.ReadLine();
+                            bool found = false;
+
+                            for (int i = 0; i < current.getKeyWordsCount(); ++i)
+                            {
+                                if (newKey == current.getKeyWords(i))
+                                {
+                                    found = true;
+                                    break;
+                                }
+                            }
+
+                            if (!found)
+                            {
+                                config.addLocalisation(newKey);
+                                Console.WriteLine("key successfuly added");
+
+                                Console.WriteLine("");
+
+                                Console.WriteLine("enter value");
+                                string value = Console.ReadLine();
+                                current.addLocalisation(newKey, value);
+
+                                Console.WriteLine("value successfuly added");
+                            }
+                            else
+                                Console.WriteLine("key already exists");
+
+                            Console.WriteLine("");
                             break;
                         }
                     case "6":
                         {
                             Console.Clear();
+                            Console.WriteLine("Remove a localisation");
+                            Console.WriteLine("");
+                            Console.WriteLine("enter key to remove :");
+
+                            string key = Console.ReadLine();
+                            List<string> keys = config.getKeyWords();
+                            bool found = false;
+
+                            for (int i = 0; i < keys.Count; ++i)
+                            {
+                                if (key == keys[i])
+                                {
+                                    found = true;
+                                    break;
+                                }
+                            }
+
+                            if (found)
+                            {
+                                current.removeLocalisation(key);
+                                Console.WriteLine("localisation successfuly removed");
+                            }
+                            else
+                                Console.WriteLine("could not remove key : key " + key + " not found");
+
+                            Console.WriteLine("");
                             break;
                         }
                     case "7":
                         {
                             Console.Clear();
+
+                            string path = Path.Combine(Environment.CurrentDirectory, @"..\..\..\dictionary\" + current.getName() + ".txt");
+                            StreamWriter file = new StreamWriter(path);
+
+                            for (int i = 0; i < current.getKeyWordsCount(); ++i)
+                            {
+                                string key = current.getKeyWords(i);
+                                file.Write(key + "|" + current.getContent(key));
+                                if (i == current.getKeyWordsCount() - 1)
+                                    break;
+                                file.Write('\n');
+                            }
+
+                            file.Close();
+                            file.Dispose();
+
+                            Console.WriteLine("localisation saved in file " + path);
+                            Console.WriteLine("");
+
+                            path = Path.Combine(Environment.CurrentDirectory, @"..\..\..\dictionary\config.txt");
+                            file = new StreamWriter(path);
+
+                            List<string> languages = config.getLanguages();
+                            List<string> keywords = config.getKeyWords();
+                            for (int i = 0; i < languages.Count; ++i)
+                            {
+                                file.Write(languages[i]);
+                                if (i == languages.Count - 1)
+                                    break;
+                                file.Write("|");
+                            }
+                            file.Write('\n');
+                            for (int i = 0; i < keywords.Count; ++i)
+                            {
+                                file.Write(keywords[i]);
+                                if (i == keywords.Count - 1)
+                                    break;
+                                file.Write("|");
+                            }
+
+                            file.Close();
+                            file.Dispose();
+
+                            Console.WriteLine("config saved in file " + path);
+                            Console.WriteLine("");
                             break;
                         }
                     case "8":
