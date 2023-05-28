@@ -1,0 +1,17 @@
+# visual studio
+.vs
+x64
+x86
+[Bb]uild
+[Oo]ut
+
+# c++
+*.user
+*.filters
+
+# c#
+bin
+obj
+
+# python
+__pycache__
