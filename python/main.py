@@ -1,5 +1,5 @@
 from helloworld import *
-from longestCommonPrefix import *
+from longestcommonprefix import *
 from ispalindrome import *
 
 #helloWorld()

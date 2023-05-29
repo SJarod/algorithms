@@ -23,7 +23,7 @@
   <ItemGroup>
     <Compile Include="helloworld.py" />
     <Compile Include="ispalindrome.py" />
-    <Compile Include="longestCommonPrefix.py" />
+    <Compile Include="longestcommonprefix.py" />
     <Compile Include="main.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
