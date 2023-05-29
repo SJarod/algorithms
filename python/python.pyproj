@@ -22,6 +22,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="helloworld.py" />
+    <Compile Include="ispalindrome.py" />
     <Compile Include="longestCommonPrefix.py" />
     <Compile Include="main.py" />
   </ItemGroup>
