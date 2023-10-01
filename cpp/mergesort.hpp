@@ -1,6 +1,6 @@
 #include <vector>
 
-std::vector<int> merge_vectors_ascending(std::vector<int>& a, std::vector<int>& b)
+inline std::vector<int> merge_vectors_ascending(std::vector<int>& a, std::vector<int>& b)
 {
     std::vector<int> out;
 
@@ -24,7 +24,7 @@ std::vector<int> merge_vectors_ascending(std::vector<int>& a, std::vector<int>& 
     return out;
 }
 
-void merge_sort(std::vector<int>& arr)
+inline void merge_sort(std::vector<int>& arr)
 {
     int half = arr.size() / 2;
 
