@@ -7,8 +7,7 @@
 // create a set with unique nodes from the graph (given a node from the graph)
 void graph_node_set(std::set<Node*>& unique, Node* node)
 {
-	unique.emplace(node);
-	//unique.insert(node);
+	unique.insert(node);
 	for (const auto& n : node->neighbors)
 	{
 		// if neighbor node was not added to unique set yet
@@ -19,6 +18,12 @@ void graph_node_set(std::set<Node*>& unique, Node* node)
 
 void print_graph(Node* node)
 {
+	if (!node)
+	{
+		std::cout << "empty graph" << std::endl;
+		return;
+	}
+
 	std::set<Node*> toPrint;
 	graph_node_set(toPrint, node);
 
@@ -39,7 +44,7 @@ void print_graph(Node* node)
 	}
 }
 
-void delete_graph(Node* node)
+void delete_graph_set(Node* node)
 {
 	std::set<Node*> toDelete;
 	graph_node_set(toDelete, node);
@@ -50,19 +55,29 @@ void delete_graph(Node* node)
 	}
 }
 
+void delete_graph_array(Node* node)
+{
+	if (node)
+		delete[] node;
+}
+
 Node* cloneGraph(Node* node)
 {
+	if (!node)
+		return nullptr;
+
 	std::set<Node*> toClone;
 	graph_node_set(toClone, node);
 
-	std::vector<Node*> clone(toClone.size(), nullptr);
+	Node* clone = new Node[toClone.size()];
 
 	// create nodes
 	int i = 0;
 	for (const auto& n : toClone)
 	{
 		// create node with value and vector of neightbors (with nullptr value)
-		clone[i] = new Node(n->val, std::vector<Node*>(n->neighbors.size(), nullptr));
+		clone[i].val = n->val;
+		clone[i].neighbors = std::vector<Node*>(n->neighbors.size(), nullptr);
 		++i;
 	}
 
@@ -74,30 +89,86 @@ Node* cloneGraph(Node* node)
 		int j = 0;
 		for (const auto& nn : n->neighbors)
 		{
-			clone[i]->neighbors[j] = clone[nn->val - 1];
+			clone[i].neighbors[j] = &clone[nn->val - 1];
 			++j;
 		}
 		++i;
 	}
 
-	return clone.empty() ? nullptr : clone[0];
+	return clone ? clone : nullptr;
 }
 
 void exercice_three()
 {
-	Node one(1);
-	Node two(2);
-	Node three(3);
-	Node four(4);
+	// example 1
 
-	one.neighbors = { &two, &four };
-	two.neighbors = { &one, &three };
-	three.neighbors = { &two, &four };
-	four.neighbors = { &one, &three };
+	{
+		Node one(1);
+		Node two(2);
+		Node three(3);
+		Node four(4);
 
-	print_graph(&one);
-	std::cout << std::endl;
-	Node* clone = cloneGraph(&one);
-	print_graph(clone);
-	delete_graph(clone);
+		one.neighbors = { &two, &four };
+		two.neighbors = { &one, &three };
+		three.neighbors = { &two, &four };
+		four.neighbors = { &one, &three };
+
+		print_graph(&one);
+		std::cout << std::endl;
+		Node* clone = cloneGraph(&one);
+		print_graph(clone);
+		std::cout << std::endl;
+		delete_graph_array(clone);
+	}
+
+	// example 2
+
+	{
+		Node one(1);
+
+		one.neighbors = {};
+
+		print_graph(&one);
+		std::cout << std::endl;
+		Node* clone = cloneGraph(&one);
+		print_graph(clone);
+		std::cout << std::endl;
+		delete_graph_array(clone);
+	}
+
+	// example 3
+
+	{
+		print_graph(nullptr);
+		std::cout << std::endl;
+		Node* clone = cloneGraph(nullptr);
+		print_graph(clone);
+		std::cout << std::endl;
+		delete_graph_array(clone);
+	}
+
+	// test 1
+
+	{
+		Node one(1);
+		Node two(2);
+		Node three(3);
+		Node four(4);
+		Node five(5);
+		Node six(6);
+
+		one.neighbors = { &two, &four, &six };
+		two.neighbors = { &one, &four, &three };
+		three.neighbors = { &two, &four, &five };
+		four.neighbors = { &one, &two, &three, &five, &six };
+		five.neighbors = { &three, &four, &six };
+		six.neighbors = { &one, &four, &five };
+
+		print_graph(&one);
+		std::cout << std::endl;
+		Node* clone = cloneGraph(&one);
+		print_graph(clone);
+		std::cout << std::endl;
+		delete_graph_array(clone);
+	}
 }
