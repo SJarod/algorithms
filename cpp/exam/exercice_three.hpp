@@ -58,7 +58,7 @@ void delete_graph_set(Node* node)
 void delete_graph_array(Node* node)
 {
 	if (node)
-		delete[] node;
+		delete[] (node - (node->val - 1));
 }
 
 Node* cloneGraph(Node* node)
@@ -95,7 +95,7 @@ Node* cloneGraph(Node* node)
 		++i;
 	}
 
-	return clone ? clone : nullptr;
+	return clone ? &clone[node->val - 1] : nullptr;
 }
 
 void exercice_three()
@@ -113,9 +113,9 @@ void exercice_three()
 		three.neighbors = { &two, &four };
 		four.neighbors = { &one, &three };
 
-		print_graph(&one);
+		print_graph(&three);
 		std::cout << std::endl;
-		Node* clone = cloneGraph(&one);
+		Node* clone = cloneGraph(&three);
 		print_graph(clone);
 		std::cout << std::endl;
 		delete_graph_array(clone);
