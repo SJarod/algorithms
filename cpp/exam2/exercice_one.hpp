@@ -6,6 +6,8 @@
 #include <deque>
 #include <algorithm>
 
+#include "utils.hpp"
+
 /*
 Exercice 1 : Merge Sorted Array
 A partir de deux tableaux d’entiers nums1 et nums2, triés dans l’ordre croissant, et de deux
@@ -73,7 +75,7 @@ void merge(std::vector<int>& nums1, int m, std::vector<int>& nums2, int n)
 }
 
 /**
- * Merge sorted array function with std::sort
+ * Merge Sorted Array function with std::sort (c'est de la triche ?)
  */
 void merge_std(std::vector<int>& nums1, int m, std::vector<int>& nums2, int n)
 {
@@ -82,22 +84,6 @@ void merge_std(std::vector<int>& nums1, int m, std::vector<int>& nums2, int n)
         nums1[i] = nums2[j];
     }
     std::sort(nums1.begin(), nums1.begin() + m + n);
-}
-
-void print_vector(const std::vector<int>& v)
-{
-    if (v.empty())
-    {
-        printf("{0}\n");
-        return;
-    }
-
-    printf("%d", v[0]);
-    for (int i = 1; i < v.size(); ++i)
-    {
-        printf(", %d", v[i]);
-    }
-    printf("\n");
 }
 
 void exercice_one()
