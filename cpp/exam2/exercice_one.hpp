@@ -3,6 +3,8 @@
 #include <iostream>
 #include <vector>
 #include <cassert>
+#include <deque>
+#include <algorithm>
 
 /*
 Exercice 1 : Merge Sorted Array
@@ -39,36 +41,57 @@ Vous validerez votre fonction avec des tests issus des exemples 1, 2 et 3.
 
 void merge(std::vector<int>& nums1, int m, std::vector<int>& nums2, int n)
 {
-    std::vector<int> temp1;
-    temp1.assign(nums1.begin(), nums1.begin() + m);
-    std::vector<int> temp2;
-    temp2.assign(nums2.begin(), nums2.begin() + n);
-
-    auto changeValue = [&](int i, int val) {
-        nums1[i++] = val;
-    };
-
-    int i = 0;
-    for (int a : temp1)
+    std::vector<int> merged(m + n, 0);
+    std::deque<int> temp1(nums1.begin(), nums1.begin() + m);
+    std::deque<int> temp2(nums2.begin(), nums2.begin() + n);
+    for (int i = 0; i < m + n; ++i)
     {
-        for (int b : temp2)
+        if (temp1.empty())
         {
-            if (a >= b)
-            {
-                changeValue(i, b);
-                break;
-            }
-            else
-            {
-                changeValue(i, a);
-            }
+            merged[i] = temp2.front();
+            temp2.pop_front();
+            continue;
+        }
+        if (temp2.empty())
+        {
+            merged[i] = temp1.front();
+            temp1.pop_front();
+            continue;
+        }
+        if (temp1.front() <= temp2.front())
+        {
+            merged[i] = temp1.front();
+            temp1.pop_front();
+        }
+        else
+        {
+            merged[i] = temp2.front();
+            temp2.pop_front();
         }
     }
+    nums1.assign(merged.begin(), merged.begin() + m + n);
+}
+
+/**
+ * Merge sorted array function with std::sort
+ */
+void merge_std(std::vector<int>& nums1, int m, std::vector<int>& nums2, int n)
+{
+    for (int i = m, j = 0; i < m + n; ++i, ++j)
+    {
+        nums1[i] = nums2[j];
+    }
+    std::sort(nums1.begin(), nums1.begin() + m + n);
 }
 
 void print_vector(const std::vector<int>& v)
 {
-    assert(!v.empty());
+    if (v.empty())
+    {
+        printf("{0}\n");
+        return;
+    }
+
     printf("%d", v[0]);
     for (int i = 1; i < v.size(); ++i)
     {
@@ -81,6 +104,7 @@ void exercice_one()
 {
     // example 1
     {
+        printf("example 1\n");
         std::vector<int> nums1 = {1, 2, 3, 0, 0, 0};
         int m = 3;
         std::vector<int> nums2 = {2, 5, 6};
@@ -94,5 +118,45 @@ void exercice_one()
         merge(nums1, m, nums2, n);
         printf("merged : ");
         print_vector(nums1);
+
+        printf("\n");
+    }
+    // example 2
+    {
+        printf("example 2\n");
+        std::vector<int> nums1 = {1};
+        int m = 1;
+        std::vector<int> nums2 = {};
+        int n = 0;
+
+        printf("nums1 : ");
+        print_vector(nums1);
+        printf("nums2 : ");
+        print_vector(nums2);
+
+        merge(nums1, m, nums2, n);
+        printf("merged : ");
+        print_vector(nums1);
+
+        printf("\n");
+    }
+    // example 3
+    {
+        printf("example 3\n");
+        std::vector<int> nums1 = {0};
+        int m = 0;
+        std::vector<int> nums2 = {1};
+        int n = 1;
+
+        printf("nums1 : ");
+        print_vector(nums1);
+        printf("nums2 : ");
+        print_vector(nums2);
+
+        merge(nums1, m, nums2, n);
+        printf("merged : ");
+        print_vector(nums1);
+
+        printf("\n");
     }
 }
