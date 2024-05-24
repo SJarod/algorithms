@@ -3,6 +3,7 @@
 #include <algorithm>
 
 #include "TreeNode.h"
+#include "utils.hpp"
 
 /*
 Exercice 3 : Balanced Binary Tree
@@ -23,11 +24,6 @@ Le rendu sera effectué sous la forme d’une fonction ayant le prototype suivan
 bool isBalanced(TreeNode* root)
 Vous validerez votre fonction avec des tests issus des exemples 1 et 2.
 */
-
-bool is_node_final(const TreeNode* node)
-{
-    return !(node->left || node->right);
-}
 
 int tree_depth(const TreeNode* node)
 {

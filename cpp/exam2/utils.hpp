@@ -1,5 +1,7 @@
 #pragma once
 
+#include "TreeNode.h"
+
 inline void print_vector(const std::vector<int>& v)
 {
     if (v.empty())
@@ -14,4 +16,9 @@ inline void print_vector(const std::vector<int>& v)
         printf(", %d", v[i]);
     }
     printf("\n");
+}
+
+inline bool is_node_final(const TreeNode* node)
+{
+    return !(node->left || node->right);
 }
