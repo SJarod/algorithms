@@ -1,0 +1,8 @@
+csharp/csharp/bin/
+csharp/csharp/obj/
+Localization/Localization/bin/
+Localization/Localization/obj/
+AchievementManager/AchievementManager/bin/
+AchievementManager/AchievementManager/obj/
+
+*.zip

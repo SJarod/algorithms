@@ -1,0 +1,6 @@
+INTRO_TEXT|Welcome
+MISSION_COMPLETE|Mission complete
+CONGRATULATIONS|Congratulations
+GREETINGS|Hi
+FRIEND|High five
+QUESTION|How are you?

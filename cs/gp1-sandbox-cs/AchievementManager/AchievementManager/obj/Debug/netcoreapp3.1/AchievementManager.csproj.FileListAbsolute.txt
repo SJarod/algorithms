@@ -1,0 +1,13 @@
+C:\Users\j.sengkeo\Documents\env-master\cygwin64\home\j.sengkeo\C#\GP1_SENGKEO_J\AchievementManager\AchievementManager\bin\Debug\netcoreapp3.1\AchievementManager.exe
+C:\Users\j.sengkeo\Documents\env-master\cygwin64\home\j.sengkeo\C#\GP1_SENGKEO_J\AchievementManager\AchievementManager\bin\Debug\netcoreapp3.1\AchievementManager.deps.json
+C:\Users\j.sengkeo\Documents\env-master\cygwin64\home\j.sengkeo\C#\GP1_SENGKEO_J\AchievementManager\AchievementManager\bin\Debug\netcoreapp3.1\AchievementManager.runtimeconfig.json
+C:\Users\j.sengkeo\Documents\env-master\cygwin64\home\j.sengkeo\C#\GP1_SENGKEO_J\AchievementManager\AchievementManager\bin\Debug\netcoreapp3.1\AchievementManager.runtimeconfig.dev.json
+C:\Users\j.sengkeo\Documents\env-master\cygwin64\home\j.sengkeo\C#\GP1_SENGKEO_J\AchievementManager\AchievementManager\bin\Debug\netcoreapp3.1\AchievementManager.dll
+C:\Users\j.sengkeo\Documents\env-master\cygwin64\home\j.sengkeo\C#\GP1_SENGKEO_J\AchievementManager\AchievementManager\bin\Debug\netcoreapp3.1\AchievementManager.pdb
+C:\Users\j.sengkeo\Documents\env-master\cygwin64\home\j.sengkeo\C#\GP1_SENGKEO_J\AchievementManager\AchievementManager\obj\Debug\netcoreapp3.1\AchievementManager.csprojAssemblyReference.cache
+C:\Users\j.sengkeo\Documents\env-master\cygwin64\home\j.sengkeo\C#\GP1_SENGKEO_J\AchievementManager\AchievementManager\obj\Debug\netcoreapp3.1\AchievementManager.AssemblyInfoInputs.cache
+C:\Users\j.sengkeo\Documents\env-master\cygwin64\home\j.sengkeo\C#\GP1_SENGKEO_J\AchievementManager\AchievementManager\obj\Debug\netcoreapp3.1\AchievementManager.AssemblyInfo.cs
+C:\Users\j.sengkeo\Documents\env-master\cygwin64\home\j.sengkeo\C#\GP1_SENGKEO_J\AchievementManager\AchievementManager\obj\Debug\netcoreapp3.1\AchievementManager.csproj.CoreCompileInputs.cache
+C:\Users\j.sengkeo\Documents\env-master\cygwin64\home\j.sengkeo\C#\GP1_SENGKEO_J\AchievementManager\AchievementManager\obj\Debug\netcoreapp3.1\AchievementManager.dll
+C:\Users\j.sengkeo\Documents\env-master\cygwin64\home\j.sengkeo\C#\GP1_SENGKEO_J\AchievementManager\AchievementManager\obj\Debug\netcoreapp3.1\AchievementManager.pdb
+C:\Users\j.sengkeo\Documents\env-master\cygwin64\home\j.sengkeo\C#\GP1_SENGKEO_J\AchievementManager\AchievementManager\obj\Debug\netcoreapp3.1\AchievementManager.genruntimeconfig.cache
